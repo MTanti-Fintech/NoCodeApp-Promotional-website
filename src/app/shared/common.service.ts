@@ -4,8 +4,6 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../pages/login/login.service';
 import { PasswordConfirmDialogComponent } from './password-confirm-dialog/password-confirm-dialog.component';
-import { AccountActivateConfirmDialogComponent } from './account-activate-confirm-dialog/account-activate-confirm-dialog.component';
-import { ActiveInactiveConfirmDialogComponent } from './active-inactive-confirm-dialog/active-inactive-confirm-dialog.component';
 import { from, BehaviorSubject } from 'rxjs';
 
 
@@ -86,15 +84,7 @@ export class CommonService {
     });
   }
 
-  openActiveInactiveConfirmDialog(msg) {
-    return this.dialog.open(ActiveInactiveConfirmDialogComponent, {
-      panelClass: 'confirm-dialog-container',
-      data: {
-        message: msg
-      },
-      restoreFocus: false
-    });
-  }
+ 
 
   confirmDialogChangePassword(msg) {
     return this.dialog.open(PasswordConfirmDialogComponent, {
@@ -104,14 +94,7 @@ export class CommonService {
       }
     });
   }
-  confirmDialogAccountActivate(msg) {
-    return this.dialog.open(AccountActivateConfirmDialogComponent, {
-      width: '250px',
-      data: {
-        message: msg
-      }
-    });
-  }
+  
 
   openSnackBarSuccess(message: string, action: string) {
     this.snackBar.open(message, action, {
