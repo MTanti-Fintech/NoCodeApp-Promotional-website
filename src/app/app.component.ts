@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild, isDevMode, Inject } from '@angular/core';
 import { Utility } from './shared/Utility';
 import { CookieService } from './shared/cookie.service';
 import { Router } from '@angular/router';
-import { LoginService } from './pages/login/login.service';
 import { CommonService } from './shared/common.service';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Location } from '@angular/common';
@@ -21,7 +20,6 @@ export class AppComponent extends Utility implements OnInit {
   constructor(
     private router: Router,
     private Cookie: CookieService,
-    private service: LoginService,
     private location: Location,
     private jwtToken: JWTToken,
     private renderer: Renderer2,
