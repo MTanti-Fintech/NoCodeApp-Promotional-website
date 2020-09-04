@@ -1,0 +1,20 @@
+export class OrganizationRemoteUserRequest
+{
+    Organization_Remote_Users_Id:number;
+    organization_Mst_Id:number;
+    Email:string;
+    PhoneNo:string;
+    Password:string;
+    Usage_Profile:number;
+    First_Name:string;
+    Last_Name:string;
+    Full_Name:String;
+    Entry_By:number;
+    Changepassword:string;
+    Is_Active:number;
+    Is_Active_Status:number;
+    departmentId:number;
+    Usage_Profile_value:string;
+    Last_Login:Date;
+    Department:string;
+}

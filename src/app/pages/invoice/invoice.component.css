@@ -1,0 +1,117 @@
+table{
+    width: 100%;
+}
+h2{
+    color: #EE7B11;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    line-height: 47px;
+    margin-bottom: 25px;
+}
+.form-group{
+    width: 48%;
+    margin-right: 15px;
+    float: left;
+}
+.mat-horizontal-content-container{
+    padding: 0 !important;
+}
+.login100-form-btn{
+    width: 48%;
+    margin-right: 15px !important;
+    float: left;
+}
+.login100-form-btn.send-org-details{
+    background-color: #EC8320;
+    color: white;
+}
+.login100-form-btn.send-org-details:hover{
+    background-color:rgb(185, 94, 8);
+}
+/* mat-label{
+    margin-bottom: 10px;
+} */
+.clear-selection{
+    font-size: 11px;
+    color: white !important;
+    background: gray;
+    padding: 6px 8px;
+    /* position: relative;
+    top: -71px;
+    right: -260px; */
+    float:right;
+}
+.users-count, .show-amount{
+        /* border: 1px solid; */
+        padding: 15px 20px;
+        /* background: #ebebeb; */
+        border: 1px solid #ebebeb;
+        font-size: 12px;
+        margin-right: 5px;
+        /* width: 50px !important;*/
+        font-weight: 600;
+        width: 24%;
+        display: inline-block;
+        text-align: center;
+}
+.show-amount{
+    background: rgb(78, 78, 78);
+    color: white;
+}
+.mat-slider-horizontal{
+    min-width: 97%;
+}
+.user-numbers{
+    color: #EC8320;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+}
+.add-user-small-btn{
+    background: #EC8320;
+    color: white;
+    padding: 5px 10px 5px 5px;
+}
+.add-user-small-btn span{
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+}
+.org-popup{
+   width: 800px;
+}
+.signup-form-section {
+    border: 5px solid rgb(192, 175, 160);
+    padding: 40px 20px 20px 20px;
+    position: relative;
+}
+.signup-form-section h2{
+    color:#EC8320;
+    background-color: white;
+    position: absolute;
+    top: -26px;
+    padding: 0px 5px;
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    font-size: 20px;
+}
+.email-tooltip{
+    position: relative;
+}
+.email-tooltip span{
+    position:absolute;
+    top: 34px;
+    right: 10px;
+    color: #747474;
+    font-size: 20px;
+}
+::ng-deep .mat-pseudo-checkbox-checked{
+    background:#EC8320 !important;
+}
+::ng-deep .mat-horizontal-content-container{
+    padding: 0px !important;
+}
+::ng-deep .mat-dialog-container{
+    padding: 15px 35px 0px 35px;
+    height: 600px;
+    overflow: scroll;
+}

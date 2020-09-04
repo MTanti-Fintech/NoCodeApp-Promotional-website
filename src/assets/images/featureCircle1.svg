@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="567.344px" height="587.233px" viewBox="398.837 606.722 567.344 587.233"
+	 enable-background="new 398.837 606.722 567.344 587.233" xml:space="preserve">
+<g id="Mask_Group_6">
+	<g id="orangeElebg" transform="matrix(0.995, -0.105, 0.105, 0.995, -378.202, -13.083)" opacity="0.43">
+		
+			<radialGradient id="Path_5673_1_" cx="923.1389" cy="1047.5638" r="0.4998" gradientTransform="matrix(564.3847 61.5997 59.5582 -583.7304 -582437.75 555649.5)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#E67E22"/>
+			<stop  offset="0.36" style="stop-color:#DA630C"/>
+			<stop  offset="1" style="stop-color:#D35400"/>
+		</radialGradient>
+		<path id="Path_5673" opacity="0.37" fill="url(#Path_5673_1_)" enable-background="new    " d="M959.526,725.829
+			c156.633-0.571,283.146,130.3,282.575,292.3c-0.572,162.001-128.01,293.79-284.642,294.36
+			c-156.633,0.57-283.143-130.296-282.575-292.298C675.451,858.19,802.893,726.399,959.526,725.829z"/>
+	</g>
+</g>
+</svg>

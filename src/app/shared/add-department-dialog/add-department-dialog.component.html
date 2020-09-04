@@ -1,0 +1,24 @@
+<div class="popup-small with-header">
+    <form [formGroup]="addDepartmentForm">
+        <h2 class="popup-title text-center">Add Department</h2>
+    <div mat-dialog-content>
+        <div class="form-group">
+            <mat-label>Name</mat-label>
+            <input type="text" class="form-control" formControlName="Department_Name" matInput FocusElement placeholder="Enter Department Name" (focus)="departmentPresent=false && error=false"/>
+            <mat-error *ngIf="addDepartmentForm.controls.Department_Name.errors?.required && addDepartmentForm.controls.Department_Name.touched">Department Name is
+                <strong>required</strong></mat-error>
+                <mat-error *ngIf="departmentPresent && addDepartmentForm.controls.Department_Name.touched">This department is already 
+                   <strong>preset !</strong></mat-error>
+                   <mat-error *ngIf="error && addDepartmentForm.controls.Department_Name.touched">Error in adding department !
+                    </mat-error>
+              
+        </div>
+    </div>
+    <div mat-dialog-actions class="btn-box">
+        <div class="text-right full-width">
+            <button mat-flat-button class="app-primary-button" [disabled]="!addDepartmentForm.valid" (click)="onInsertDepartment()">Add</button>
+            <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        </div>
+    </div>
+    </form>
+</div>

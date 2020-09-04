@@ -1,0 +1,96 @@
+<div class="popup-medium change-workingModal-popup">
+    <header>
+        <h2 class="popup-title text-center">Change Working Modal</h2>
+    </header>
+    <form #importUsersForm="ngForm" autocomplete="off">
+        <mat-dialog-content>
+            <form [formGroup]="changeModelForm">
+                <div class="row">
+                    <div class="col-sm-4" formArrayName="models"
+                        *ngFor="let item of changeModelForm.get('models')?.controls;let j=index;">
+                        <div class="working-modal-inner"
+                            [ngClass]="{'current-plan':item.value.Plan_Type_Mst_Id==data.PlanId}" [formGroupName]="j">
+                            <h4 class="text-center working-modal ">{{item.value.planName}}
+                                <span class="sub-text" *ngIf="item.value.Plan_Type_Mst_Id==data.PlanId">
+                                    ( Current Working Modal )
+                                </span>
+                            </h4>
+                            <div class="full-width form-group ">
+                                <mat-label>Working Days</mat-label>
+                                <div class="days-select" formGroupName="Days">
+                                    <mat-checkbox (change)="daysCheckChange($event,j)"
+                                        [disabled]="item.value.disableSelection" *ngFor="let day of days | keyvalue"
+                                        [formControlName]="day.value">{{day.value}}</mat-checkbox>
+                                    <a class="clearSelection" *ngIf="item.value.allowedNumberOfDays<=item.value.selectedNumberOfDays && item.value.Plan_Type_Mst_Id!=4"
+                                        (click)="clearSelection(j)"><i class="fa fas-cross"></i>Clear Selection</a>
+                                </div>
+                            </div>
+                            <div class="full-width form-group">
+                                <mat-label>Machine Start Time</mat-label>
+                                <input class="form-control" (change)="setEndTime(j)" (keyup)="setEndTime(j)"
+                                    [disabled]="item.value.Plan_Type_Mst_Id==4" type="time" matInput
+                                    formControlName="StartTime" min="00:00" max="12:00">
+                            </div>
+                            <div class="full-width form-group">
+                                <mat-label>Local Time</mat-label>
+                                <div>Start Time : {{item.value.StartTime}} - End Time : {{item.value.EndTime}}</div>
+                            </div>
+                            <div class="full-width form-group">
+                                <mat-label>UTC Time</mat-label>
+                                <div>Start Time : {{item.value.UTCStartTime}} - End Time : {{item.value.UTCEndTime}}
+                                </div>
+                            </div>
+                            <div class="full-width form-group"
+                                *ngIf="item.value.Plan_Type_Mst_Id!=data.PlanId && item.value.Plan_Type_Mst_Id>data.PlanId">
+                                <mat-label>Next month estimation</mat-label>
+                                <p class="large-text">$ {{item.value.payableAmount}}</p>
+                            </div>
+                            <div class="footer-box">
+                                <button mat-flat-button class="app-primary-button"
+                                    *ngIf="item.value.Plan_Type_Mst_Id==data.PlanId"
+                                    [disabled]="item.value.selectedNumberOfDays!=item.value.allowedNumberOfDays || !item.valid || item.value.Plan_Type_Mst_Id==4"
+                                    (click)="updatePlan(item)" cdkFocusInitial>Save</button>
+                                <button mat-flat-button class="app-primary-button"
+                                    *ngIf="item.value.Plan_Type_Mst_Id!=data.PlanId"
+                                    [disabled]="item.value.selectedNumberOfDays!=item.value.allowedNumberOfDays || !item.valid || item.value.Plan_Type_Mst_Id<data.PlanId"
+                                    (click)="submitPlan(item)" cdkFocusInitial>
+                                    Buy {{item.value.planName}}</button>
+                            </div>
+                            <p *ngIf="item.value.Plan_Type_Mst_Id<data.PlanId">Note: Plan cannot be Downgraded.</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <!-- <div mat-dialog-actions class="btn-box">
+            <div class="full-width text-right">
+                <button mat-flat-button class="app-primary-button" type="submit" cdkFocusInitial >Save</button>
+                <button mat-flat-button class="app-secondary-button" type="button" cdkFocusInitial>Close</button>
+            </div>
+        </div> -->
+    </form>
+</div>
+<!-- <ng-template #successInvoice>
+    <div class="popup-medium">
+      <h2 class="text-center popup-title">Invoice Generated Successfully</h2>
+  
+      <div mat-dialog-content>
+  
+        <p>Invoice generated <span class="confirmationFont">{{generatedInvoice}}</span> and you will email for
+          this invoice shortly to pay and use Services.
+          <br><br>
+          Check billing sections for more details and updates.
+          <br><br>
+          visit <a (click)="finalOkClick(1)">How To Use Services</a>
+          <br><br>
+          or <a (click)="download()">Download Document</a>
+        </p>
+  
+      </div>
+      <div class="header-action-box appClearfix">
+        <div class="right-box">
+          <button mat-raised-button class="app-secondary-button" (click)="finalOkClick(0)">ok</button>
+        </div>
+      </div>
+    </div>
+  </ng-template> -->

@@ -1,0 +1,153 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <!-- <mat-toolbar class="example-toolbar"> -->
+    <span *ngIf="userInfo.Roles != 1">
+        <chatWidget></chatWidget>
+    </span>
+    <button mat-icon-button (click)="snav.toggle()" class="menu-show-hide-icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <form [formGroup]="headerForm">
+        <div class="office-bcp-header clearfix">
+            <a class="logo header-item"><img src="../../../assets/images/officebcp-logo.png" title="OfficeBCP"></a>
+            <div class="user-name-container pull-right header-item">
+                <div class="login-user-photo">
+                    <span class="material-icons">
+                        person
+                    </span>
+                </div>
+                <a [matMenuTriggerFor]="menu" class="username-color">{{userInfo.FirstName}}
+                    <span class="material-icons">arrow_drop_down</span>
+                </a>
+                <mat-menu #menu="matMenu">
+                    <a mat-menu-item (click)=Profile(userProfile)>Profile</a>
+                    <a mat-menu-item (click)=ChangePassword()>Change password</a>
+                    <a mat-menu-item (click)=Logout()>Logout</a>
+                </mat-menu>
+            </div>
+
+            <div class="login-userinfo-container header-item" *ngIf="this.userInfo.Roles=='1'">
+                <mat-label class="org-title">User</mat-label>
+                <mat-select panelClass="position-down" formControlName="user" (selectionChange)="onUserChange($event)"
+                    class="custome-dropdown">
+                    <mat-option [value]=0>--Select--</mat-option>
+                    <mat-option *ngFor="let item of usersList" [value]="item.UserId">
+                        {{item.EmailID}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="org-name-container">
+
+                <div class="change-org-list">
+                    <mat-label class="org-title">Organization</mat-label>
+                    <mat-select panelClass="position-down" formControlName="organization" class="custome-dropdown"
+                        (selectionChange)="onOrganizationChange($event)">
+                        <mat-option *ngFor="let orglist of orglist" [value]="orglist.organization_Mst_Id">
+                            {{orglist.Domain}}
+                        </mat-option>
+                    </mat-select>
+                    <a (click)="addOrganization()" class="add-org-btn"><span class="material-icons">add</span></a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- </mat-toolbar> -->
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidenav"
+            [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [(opened)]="opened">
+            <mat-nav-list>
+                <a mat-list-item routerLink="/overview" [routerLinkActive]="['is-active']" class=""><span
+                        class="material-icons">list_alt</span>Overview</a>
+                <a mat-list-item routerLink="/organization" [hidden]="userInfo.Roles != 1"
+                    [routerLinkActive]="['is-active']"><span class="material-icons">apartment</span>Organizations</a>
+                <a mat-list-item routerLink="/employees" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">group</span>Employees</a>
+                <a mat-list-item routerLink="/department" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">view_agenda</span>Departments</a>
+                <a mat-list-item routerLink="/usage-insights" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">dashboard</span>Usage & Insights</a>
+                <a mat-list-item routerLink="/howUseServices" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">view_carousel</span>How To Use Services</a>
+                <a mat-list-item routerLink="/billing" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">payment</span>Billing</a>
+                <a mat-list-item routerLink="/cost-explorer" [routerLinkActive]="['is-active']"><span
+                        class="material-icons">monetization_on</span>Cost Explorer</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<ng-template #userProfile>
+    <div class="popup-medium">
+        <h2 class="text-center popup-title">User Profile</h2>
+        <form [formGroup]="changeUserDetails">
+            <div mat-dialog-content style="overflow: visible;">
+                <!-- <div class="row">
+                    <div class="col-sm-6"> -->
+                <div class="form-group">
+                    <div class="">
+                        <mat-label>Full Name : </mat-label>
+                        <div class="">
+                            <input type="text" class="form-control" matInput formControlName="Fullname" />
+
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-sm-6"> -->
+                <div class="form-group">
+                    <div class="">
+                        <mat-label>First Name : </mat-label>
+                        <div class="">
+                            <input type="text" class="form-control" matInput formControlName="FirstName" />
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- </div>
+                <div class="row">
+                    <div class="col-sm-6"> -->
+                <div class="form-group">
+                    <div class="">
+                        <mat-label>Last Name : </mat-label>
+                        <div class="">
+                            <input type="text" class="form-control" matInput formControlName="LastName" />
+                        </div>
+                    </div>
+                </div>
+                <!-- </div>
+                    <div class="col-sm-6"> -->
+                <div class="form-group">
+                    <div class="">
+                        <mat-label>Email : </mat-label>
+                        <div class="">
+                            <input type="text" class="form-control" disabled matInput [value]="profileData.EmailID">
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- </div>
+                <div class="row">
+                    <div class="col-sm-6"> -->
+                <div class="form-group">
+                    <div class="">
+                        <mat-label>Account Created At : </mat-label>
+                        <div class="">
+                            <input type="text" class="form-control" disabled matInput
+                                [value]="profileData.Entry_Dt_Time">
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- </div> -->
+                <div mat-dialog-actions class="btn-box">
+                    <div class="full-width text-right">
+                        <button mat-flat-button class="app-primary-button" (click)="saveDetails()">Save</button>
+                        <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

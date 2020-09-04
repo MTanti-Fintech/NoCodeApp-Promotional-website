@@ -1,0 +1,809 @@
+<div class="main overview-main">
+  <div class="row tile-row">
+    <div class="col-md-12 col-lg-6 col-xl-5 tile-outer">
+      <div class="common-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Organization Details</h2>
+          </div>
+          <div class="right-box">
+            <!-- <button mat-button class="action-btn" (click)="onAddOrganization()"><mat-icon>add</mat-icon>Add Organization </button> -->
+            <button mat-flat-button class="app-action-button" (click)="onAddOrganization()"
+              [disabled]="disableOrganizationEditing">
+              <mat-icon>add</mat-icon>
+              <span class="btn-text">Add Organization</span>
+            </button>
+          </div>
+        </div>
+        <div class="content with-pad" *ngIf="!disableOrganizationEditing">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Organization Name</span>
+                <div class="value-wrapper">
+                  <p class="value">
+                    {{organizationDetails.OrganizationName}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 ">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Domain</span>
+                <div class="value-wrapper">
+                  <p class="value">{{organizationDetails.OrganizationDomain}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6" [hidden]="userInfo.Roles != 1">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Organization Code</span>
+                <div class="value-wrapper">
+                  <p class="value">{{organizationDetails.Code}}</p>
+                  <div [matTooltip]="userInfo.Roles != 1 ? 'Default values cannot be edited' : 'Edit'" >
+                  <button *ngIf="!disableOrganizationEditing" [hidden]="userInfo.Roles != 1"  mat-icon-button class="value-action-btn"
+                    (click)="onEditCode(editCode)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6" [hidden]="userInfo.Roles != 1">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Subscription ID</span>
+                <div class="value-wrapper">
+                  <p class="value subscriptionId">{{organizationDetails.subscription_id}}</p>
+                  <div [matTooltip]="userInfo.Roles != 1 ? 'Default values cannot be edited' : 'Edit'" >
+                  <button *ngIf="!disableOrganizationEditing" mat-icon-button [hidden]="userInfo.Roles != 1" class="value-action-btn"
+                    (click)="onEditSubscription(editsubscription_id)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Communication email</span>
+                <div class="value-wrapper">
+                  <p class="value"><a
+                      [href]="'mailto:'+organizationDetails.CommunicationEmail">{{organizationDetails.CommunicationEmail}}</a>
+                  </p>
+                  <!-- <button mat-icon-button class="value-action-btn" >
+                    <mat-icon>edit</mat-icon>
+                  </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content with-pad" *ngIf="disableOrganizationEditing">
+          <p class="large-number center">No Data Available</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6 col-xl-7 tile-outer">
+      <div class="common-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Plan Details</h2>
+          </div>
+          <div class="right-box">
+            <!-- <button mat-button class="action-btn" (click)="onPurchasePlan()"><mat-icon>add</mat-icon>Buy Premium Plan </button> -->
+            <button mat-flat-button class="app-action-button" *ngIf="planDetails.PlanId==1 || planDetails.PlanId==undefined" (click)="onPurchasePlan()"
+              [disabled]="disableOrganizationEditing">
+              <mat-icon>add</mat-icon>
+              <span class="btn-text">Buy Premium Plan</span>
+            </button>
+            <button mat-flat-button class="app-action-button" *ngIf="planDetails.PlanId!=1 && planDetails.PlanId!=undefined"
+              (click)="onBuyMoreUsers(BuyMoreUsers)" [disabled]="disableOrganizationEditing">
+              <mat-icon>add</mat-icon>
+              <span class="btn-text">Buy More Users</span>
+            </button>
+          </div>
+        </div>
+        <div class="content with-pad" *ngIf="!disablePlanEditing">
+          <div class="row">
+            <div class="col-md-6 col-xl-3">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Plan</span>
+                <div class="value-wrapper">
+                  <p class="value">
+                    {{planDetails.Plan_Name}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Expires At</span>
+                <div class="value-wrapper">
+                  <p class="value">
+                    {{expirydate.value}}
+                  </p>
+                  <button *ngIf="!disablePlanEditing" [hidden]="userInfo.Roles != 1" mat-icon-button class="value-action-btn"
+                    (click)="onChangeExpiryDate(datePicker)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-5">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Status</span>
+                <div class="value-wrapper">
+                  <p class="value">
+                    <span class="status-healthy" *ngIf="planDetails.Is_Active == 1">
+                      <i class="material-icons">done</i>  
+                      Active
+                    </span>
+                    <span class="status-running"*ngIf="planDetails.Is_Active == 0">
+                      <i class="material-icons"> autorenew </i>  
+                      Pending
+                    </span>
+                    
+                  </p>
+                  <button mat-icon-button matTooltip="Edit" [hidden]="userInfo.Roles != 1"class="value-action-btn" (click)="openEditStatusDialog(editStatus,planDetails)">
+                    <i class="material-icons" >create</i>
+                  </button>  
+                  <button mat-icon-button matTooltip="Email plan status" [hidden]="userInfo.Roles != 1" class="value-action-btn" (click)="sendPlanActiveStatus()">
+                    <i class="material-icons" >email</i>
+                  </button>
+                  
+                  <!-- <button mat-icon-button class="value-action-btn" *ngIf="!disablePlanEditing">
+                    <mat-icon>edit</mat-icon>
+                  </button> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12">
+              <div class="lbl-val-wrapper">
+                <span class="value-lbl">Working Modal</span>
+                <div class="value-wrapper">
+                  <p class="value">
+                    {{workingModel}}
+                  </p>
+                  <button mat-icon-button class="value-action-btn" *ngIf="!disablePlanEditing"
+                    (click)="changeWorkingModelPopup()">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div class="weekdays-container">
+                  <a [ngClass]="{'disable':!selectedDays.includes(item.key) && !selectedDays.includes('7')}"
+                    *ngFor="let item of days | keyvalue">{{item.value | uppercase}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content with-pad" *ngIf="disablePlanEditing">
+          <p class="large-number center">No Data Available</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row tile-row">
+    <div class="col-sm-12  tile-outer">
+      <div class="common-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Admin Details</h2>
+          </div>
+          <div class="right-box">
+            <!-- <button mat-button class="action-btn" (click)="onAddAdmin(addAdmin)" ><mat-icon>add</mat-icon>Add </button> -->
+            <button mat-flat-button class="app-action-button" (click)="onAddAdmin(addAdmin)">
+              <mat-icon>add</mat-icon>
+              <span class="btn-text">Invite Admin</span>
+            </button>
+          </div>
+        </div>
+        <div class="content with-pad">
+          <div class="common-grid-box">
+            <div class="tbl-scroll-container">
+              <table mat-table #addAdminTable [dataSource]="datasource">
+
+                <!-- Position Column -->
+                <!-- <ng-container matColumnDef="First Name">
+                  <th mat-header-cell *matHeaderCellDef> First Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.FirstName }} </td>
+                </ng-container>
+
+                 Name Column -->
+                 <ng-container matColumnDef="Id">
+                  <th mat-header-cell *matHeaderCellDef > Sr. </th>
+                  <td mat-cell style="text-align: right;" *matCellDef="let element;"> {{datasource.filteredData.indexOf(element)+1}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="Last Name">
+                  <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.LastName}} </td>
+                </ng-container> -->
+                <ng-container matColumnDef="Full Name">
+                  <th mat-header-cell *matHeaderCellDef> Full Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Full_Name}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="Email Id">
+                  <th mat-header-cell *matHeaderCellDef> Email Id </th>
+                  <td mat-cell *matCellDef="let element"> {{element.EmailID}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div class="cell-inner-wrapper">
+                      <button mat-icon-button matTooltip="Reset Password" (click)="onChangePassword(element)">
+                        <i class="material-icons">lock</i>
+                      </button>
+                      <button mat-icon-button matTooltip="Edit" (click)="onEditDetails(element,editAdmin)">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <mat-slide-toggle class="primary-toggle" [checked]="element.UserStatus == 1 ? true : false"
+                        (change)="EnableDisableConfirmPopup($event,element.EmailID)"></mat-slide-toggle>
+                    </div>
+                  </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Edit Details">
+                  <th mat-header-cell *matHeaderCellDef> Edit Details </th>
+                  <td mat-cell *matCellDef="let element">
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="disable">
+                  <th mat-header-cell *matHeaderCellDef class="icon-column"> Enable / Disable </th>
+                  <td mat-cell *matCellDef="let element">
+                  </td>
+                </ng-container> -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row tile-row">
+    <div class="col-sm-6 tile-outer">
+      <div class="common-tile plan-details-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Employee Details</h2>
+          </div>
+          <div class="right-box">
+            <button mat-flat-button class="app-action-button" (click)="onAddUser(0)"
+              [disabled]="(lightUserCount+mediumUserCount+heavyUserCount)>=planDetails.No_of_Users">
+              <mat-icon>person_add</mat-icon>
+              <span class="btn-text">New Employee</span>
+            </button>
+            <!-- <button mat-button class="action-btn"><mat-icon>edit</mat-icon>Change </button> -->
+            <button mat-flat-button class="app-action-button" [hidden]="userInfo.Roles != 1" (click)="onchangeUserLimit(changeUserLimit)"
+              [disabled]="disableOrganizationEditing">
+              <mat-icon>edit</mat-icon>
+              <span class="btn-text">Change</span>
+            </button>
+          </div>
+        </div>
+        <div class="content">
+          <div class="box-body text-center">
+            <ul class="float-none">
+              <li class="light">
+                <p class="prog-title">Light</p>
+                <div class="prog-container">
+                  <circle-progress [radius]="60" [space]="-10" [outerStrokeGradient]="true" [outerStrokeWidth]="10"
+                    [outerStrokeColor]="'#59B0D4'" [outerStrokeGradientStopColor]="'#59B0D4'"
+                    [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]="10" [subtitleFontSize]="21"
+                    [animateTitle]="false" [animationDuration]="1000" [showUnits]="true" [unitsFontSize]="25"
+                    [showBackground]="false" [clockwise]="true" [responsive]="true" [startFromZero]="false"
+                    [percent]="(lightUserCount*100)/planDetails.No_of_Users" [showTitle]="true" [titleFontSize]="30"
+                    [showSubtitle]="false"></circle-progress>
+                </div>
+                <div class="labels-box ">
+                  <span class="left">Used : <span>{{lightUserCount}}</span></span>
+                  <span class="right">Total : <span>{{planDetails.No_of_Users}}</span></span>
+                </div>
+                <!-- <a *ngIf="lightUserCount<planDetails.Default_Light_Profile_Users" (click)="onAddUser(0)">ADD</a> -->
+              </li>
+              <!-- <li class="medium">
+                <p class="prog-title">Medium</p>
+                <div class="prog-container">
+                  <circle-progress [radius]="60" [space]="-10" [outerStrokeGradient]="true" [outerStrokeWidth]="10"
+                    [outerStrokeColor]="'#1481D4'" [outerStrokeGradientStopColor]="'#1481D4'"
+                    [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]="10" [subtitleFontSize]="21"
+                    [animateTitle]="false" [animationDuration]="1000" [showUnits]="true" [unitsFontSize]="25"
+                    [showBackground]="false" [clockwise]="true" [responsive]="true" [startFromZero]="false"
+                    [percent]="(mediumUserCount*100)/planDetails.No_of_Users" [showTitle]="true" [titleFontSize]="30"
+                    [showSubtitle]="false"></circle-progress>
+                </div>
+                <div class="labels-box ">
+                  <span class="left">Used : <span>{{mediumUserCount}}</span></span>
+                  <span class="right">Total : <span>{{planDetails.No_of_Users}}</span></span>
+                </div> -->
+                <!-- <a *ngIf="mediumUserCount<planDetails.Default_Medium_Profile_Users" (click)="onAddUser(1)">ADD</a> -->
+              <!-- </li>
+              <li class="heavy">
+                <p class="prog-title">Heavy</p>
+                <div class="prog-container">
+                  <circle-progress [radius]="60" [space]="-10" [outerStrokeGradient]="true" [outerStrokeWidth]="10"
+                    [outerStrokeColor]="'#05469B'" [outerStrokeGradientStopColor]="'#05469B'"
+                    [innerStrokeColor]="'#e7e8ea'" [innerStrokeWidth]="10" [subtitleFontSize]="21"
+                    [animateTitle]="false" [animationDuration]="1000" [showUnits]="true" [unitsFontSize]="25"
+                    [showBackground]="false" [clockwise]="true" [responsive]="true" [startFromZero]="false"
+                    [percent]="(100*heavyUserCount)/planDetails.No_of_Users" [showTitle]="true" [titleFontSize]="30"
+                    [showSubtitle]="false"></circle-progress>
+                </div>
+                <div class="labels-box ">
+                  <span class="left">Used : <span>{{heavyUserCount}}</span></span>
+                  <span class="right">Total : <span>{{planDetails.No_of_Users}}</span></span>
+                </div> -->
+                <!-- <a *ngIf="(lightUserCount+mediumUserCount+heavyUserCount)<planDetails.No_of_Users" (click)="onAddUser(2)">ADD USER</a> -->
+              <!-- </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-sm-6 tile-outer">
+      <div class="common-tile plan-details-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Plan Details</h2>
+          </div>
+          <div class="right-box">
+            <button mat-button class="action-btn"><mat-icon>edit</mat-icon>Change </button>
+          </div>
+        </div>
+        <div class="content">
+          <div class="box-body text-center">
+            <ul class="float-none">
+              <li class="light">
+                <p>Light</p>
+                <p class="large-number">{{lightUserCount}}/{{planDetails.Default_Light_Profile_Users}}</p>
+                <a *ngIf="lightUserCount<planDetails.Default_Light_Profile_Users" (click)="onAddUser(0)">ADD</a>
+              </li>
+              <li class="medium">
+                <p>Medium</p>
+                <p class="large-number">{{mediumUserCount}}/{{planDetails.Default_Medium_Profile_Users}}</p>
+                <a *ngIf="mediumUserCount<planDetails.Default_Medium_Profile_Users" (click)="onAddUser(1)">ADD</a>
+              </li>
+              <li class="heavy">
+                <p>Heavy</p>
+                <p class="large-number">{{heavyUserCount}}/{{planDetails.Default_Heavy_Profile_Users}}</p>
+                <a *ngIf="heavyUserCount<planDetails.Default_Heavy_Profile_Users" (click)="onAddUser(2)">ADD</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-sm-6 tile-outer">
+      <div class="common-tile department-details-tile mat-elevation-z4">
+        <div class="header">
+          <div class="left-box">
+            <h2>Department Details</h2>
+          </div>
+        </div>
+        <div class="content">
+          <div class="box-body text-center" *ngIf="!noDepartment">
+            <ul class="float-none">
+              <li class="" *ngFor="let department of departmentDetails">
+                <div class="inner-wrapper">
+                  <p class="button-text">{{department.Department_Name}}</p>
+                  <p class="large-number">{{department.DepartmentEmployeeCount}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="box-body text-center" *ngIf="noDepartment">
+            <p class="large-number">No Data Available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-officebcp-footer></app-officebcp-footer>
+</div>
+<ng-template #addAdmin>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">+ Invite Admin</h2>
+    <form [formGroup]="addAdminForm">
+      <div mat-dialog-content>
+        <!-- <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <mat-label>First Name </mat-label>
+              <input type="text" class="form-control" formControlName="firstName" matInput FocusElement
+                placeholder="Enter First Name" />
+              <mat-error *ngIf="!addAdminForm.controls.firstName.valid && addAdminForm.controls.firstName.touched">
+                Firstname is required.
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <mat-label>Last Name </mat-label>
+              <input type="text" class="form-control" formControlName="lastName" matInput FocusElement
+                placeholder="Enter Last Name" />
+              <mat-error *ngIf="!addAdminForm.controls.lastName.valid && addAdminForm.controls.lastName.touched">
+                Lastname is required.
+              </mat-error>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"> -->
+            <div class="form-group">
+              <mat-label>Full Name </mat-label>
+              <input type="text" class="form-control" formControlName="fullName" matInput FocusElement
+                placeholder="Enter Full Name" />
+              <mat-error *ngIf="!addAdminForm.controls.fullName.valid && addAdminForm.controls.fullName.touched">
+                Full Name is required.
+              </mat-error>
+            </div>
+          <!-- </div>
+          <div class="col-sm-6"> -->
+            <div class="form-group">
+              <mat-label>Admin Email</mat-label>
+              <input type="text" class="form-control" formControlName="adminEmail" matInput FocusElement
+                placeholder="Enter Organization Email" />
+              <mat-error
+                *ngIf="addAdminForm.controls.adminEmail.errors?.required && addAdminForm.controls.adminEmail.touched">
+                Admin Email is required.
+              </mat-error>
+              <mat-error
+                *ngIf="addAdminForm.controls.adminEmail.errors?.email && addAdminForm.controls.adminEmail.touched ">
+                Admin Email is not in proper format
+              </mat-error>
+            </div>
+          <!-- </div> -->
+        <!-- </div> -->
+        <mat-error *ngIf=addAdminError>
+          {{ Issues }}
+        </mat-error>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+          <button mat-flat-button class="app-primary-button" color="primary" [disabled]="!addAdminForm.valid"
+            (click)="onInsertAdmin()">
+            Add
+          </button>
+          <button mat-flat-button class="app-secondary-button" color="secondary" (click)="onNoClick()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editsubscription_id>
+  <div class="popup-small">
+    <h2 class="text-center popup-title">Subscription ID</h2>
+    <form [formGroup]="editOrganizationForm">
+      <div>
+        <div class="full-width form-group">
+          <input type="text" class="form-control" formControlName="subscription_id" matInput FocusElement placeholder="Enter" />
+        </div>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+          <button mat-flat-button class="app-primary-button" (click)="EditSubscriptionId()"
+            [disabled]="editOrganizationForm.controls.subscription_id.errors?.required || organizationDetails.subscription_id==editOrganizationForm.value.subscription_id">Save</button>
+          <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editCode>
+  <div class="popup-small">
+    <h2 class="text-center popup-title">Organization Code</h2>
+    <form [formGroup]="editOrganizationForm">
+      <div mat-dialog-content>
+        <div class="full-width form-group">
+          <input type="text" class="form-control orgCode" formControlName="Code" matInput FocusElement placeholder="Enter Code" />
+        </div>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+          <button (click)="EditCode()" mat-flat-button class="app-primary-button"
+            [disabled]="editOrganizationForm.controls.Code.errors?.required || editOrganizationForm.value.Code==organizationDetails.Code">Save</button>
+          <button (click)="onNoClick()" mat-flat-button class="app-secondary-button">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- Edit Admin Template -->
+<ng-template #editAdmin>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">Admin Details</h2>
+    <form [formGroup]="editAdminForm">
+      <div mat-dialog-content>
+        <!-- <input type="text" formControlName="userId" matInput FocusElement /> -->
+        <!-- <div class="row">
+          <div class="col-sm-6"> -->
+            <!-- <div class="form-group">
+              <mat-label>First Name </mat-label>
+              <input type="text" class="form-control" formControlName="firstName" matInput FocusElement
+                placeholder="Enter First Name" />
+              <mat-error *ngIf="!editAdminForm.controls.firstName.valid && editAdminForm.controls.firstName.touched">
+                Firstname is required.
+              </mat-error>
+            </div> -->
+          <!-- </div>
+          <div class="col-sm-6"> -->
+            <!-- <div class="form-group">
+              <mat-label>Last Name </mat-label>
+              <input type="text" class="form-control" formControlName="lastName" matInput FocusElement
+                placeholder="Enter Last Name" />
+              <mat-error *ngIf="!editAdminForm.controls.lastName.valid && editAdminForm.controls.lastName.touched">
+                Lastname is required.
+              </mat-error>
+            </div>
+          </div> -->
+        <!-- </div>
+        <div class="row"> -->
+          <!-- <div class="col-sm-6"> -->
+            <div class="form-group">
+              <mat-label>Full Name </mat-label>
+              <input type="text" class="form-control" formControlName="fullName" matInput FocusElement
+                placeholder="Enter Full Name" />
+              <mat-error *ngIf="!editAdminForm.controls.fullName.valid && editAdminForm.controls.fullName.touched">
+                Firstname is required.
+              </mat-error>
+            </div>
+          <!-- </div> -->
+          <!-- <div class="col-sm-6"> -->
+            <div class="form-group">
+              <mat-label>Admin Email</mat-label>
+              <input type="text" class="form-control" formControlName="Email" matInput FocusElement
+                placeholder="Enter Organization Email" />
+              <mat-error *ngIf="editAdminForm.controls.Email.errors?.required && editAdminForm.controls.Email.touched">
+                Admin Email is required.
+              </mat-error>
+              <mat-error *ngIf="editAdminForm.controls.Email.errors?.email && editAdminForm.controls.Email.touched">
+                Admin Email is not in proper format
+              </mat-error>
+            </div>
+          <!-- </div> -->
+        <!-- </div> -->
+        <mat-error *ngIf=addAdminError>
+          {{ Issues }}
+        </mat-error>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="text-right full-width">
+          <button mat-flat-button class="app-primary-button" [disabled]="!editAdminForm.valid"
+            (click)="onEditAdmin()">Update</button>
+          <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- Date Picker -->
+<!-- Date Picker -->
+<ng-template #datePicker>
+  <mat-calendar [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+  <button mat-raised-button color="primary" class="pull-right" [disabled]="!datechange"
+    (click)="changeDate()">Save</button>
+</ng-template>
+
+<ng-template #changeUserLimit>
+  <form [formGroup]="inpuEmployeeForm">
+    <div class="popup-medium">
+      <h2 class="text-center popup-title">+ Change User Limit</h2>
+      <!-- 
+  <h4>How many Light users you want ?
+    <button>
+      <mat-icon (click)="onDecrementNumberOfUser(0)">minimize</mat-icon>
+    </button>
+    {{light}}
+    <button>
+      <mat-icon (click)="onIncrementNumberOfUser(0)">add</mat-icon>
+    </button>
+  </h4>
+  <h4>How many Medium users you want ?
+    <button>
+      <mat-icon (click)="onDecrementNumberOfUser(1)">minimize</mat-icon>
+    </button>
+    {{medium}}
+    <button>
+      <mat-icon (click)="onIncrementNumberOfUser(1)">add</mat-icon>
+    </button>
+  </h4>
+  <h4>How many Heavy users you want ?
+    <button>
+      <mat-icon (click)="onDecrementNumberOfUser(2)">minimize</mat-icon>
+    </button>
+    {{heavy}}
+    <button>
+      <mat-icon (click)="onIncrementNumberOfUser(2)">add</mat-icon>
+    </button>
+  </h4> -->
+      <!-- <h2 class="popup-sub-header">Employees</h2> -->
+      <div mat-dialog-content>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="incDec-ctrl-wrapper">
+              <h4 class="ctrl-title" style="padding-top: 15px;">Toal Employee</h4>
+              <div class="incDec-ctrl">
+                <button mat-icon-button class="incDec-button left">
+                  <mat-icon (click)="onDecrementNumberOfUser(0)">remove</mat-icon>
+                </button>
+                <input type="number" formControlName="LightUsers" (change)="onEmployeeNumberInputChange(0)" />
+                <button mat-icon-button class="incDec-button right">
+                  <mat-icon (click)="onIncrementNumberOfUser(0)">add</mat-icon>
+                </button>
+              </div>
+              <!-- <div class="description">
+                <h4 class="ctrl-title sub-title">Description</h4>
+                <p class="ctrl-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              </div> -->
+            </div>
+          </div>
+          <!-- <div class="col-sm-4">
+          <div class="incDec-ctrl-wrapper">
+            <h4 class="ctrl-title">Medium Employee</h4>
+            <div class="incDec-ctrl">
+              <button mat-icon-button class="incDec-button left">
+                <mat-icon (click)="onDecrementNumberOfUser(1)">remove</mat-icon>
+              </button>
+              <input type="number" formControlName="MediumUsers" (change)="onEmployeeNumberInputChange(1)" />
+              <button mat-icon-button class="incDec-button right">
+                <mat-icon (click)="onIncrementNumberOfUser(1)">add</mat-icon>
+              </button>
+            </div>
+            <div class="description">
+              <h4 class="ctrl-title sub-title">Description</h4>
+              <p class="ctrl-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            </div>
+          </div>
+        </div> 
+        <div class="col-sm-4">
+          <div class="incDec-ctrl-wrapper">
+            <h4 class="ctrl-title">Heavy Employee</h4>
+            <div class="incDec-ctrl">
+              <button mat-icon-button class="incDec-button left">
+                <mat-icon (click)="onDecrementNumberOfUser(2)">remove</mat-icon>
+              </button>
+              <input type="number" formControlName="HeavyUsers" (change)="onEmployeeNumberInputChange(2)" />
+              <button mat-icon-button class="incDec-button right">
+                <mat-icon (click)="onIncrementNumberOfUser(2)">add</mat-icon>
+              </button>
+            </div>
+            <div class="description">
+              <h4 class="ctrl-title sub-title">Description</h4>
+              <p class="ctrl-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            </div>
+          </div>
+        </div>-->
+        </div>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+          <button mat-flat-button class="app-primary-button" (click)="onSaveUserLimit()">Save</button>
+          <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+      <!-- <button mat-raised-button color="primary" class="pull-right" (click)="onSaveUserLimit()">Save</button> -->
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #BuyMoreUsers>
+
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">+ Buy More Users</h2>
+
+    <div mat-dialog-content>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <mat-label>Current Plan</mat-label>
+            <p>{{planDetails.Plan_Name}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <mat-label>Total Employees</mat-label>
+            <p>{{planDetails.No_of_Users}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-label>Add More Employee</mat-label>
+          <div class="incDec-ctrl-wrapper">
+            <div class="incDec-ctrl">
+              <button mat-icon-button class="incDec-button left">
+                <mat-icon (click)="onDecrementMoreUser()">remove</mat-icon>
+              </button>
+              <input type="number" [formControl]="buyMoreUser" (change)="onMoreUserChange()" />
+              <button mat-icon-button class="incDec-button right">
+                <mat-icon (click)="onIncrementMoreUser()">add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <mat-label>Cost</mat-label>
+            <p>${{totalCost | number:'1.2-2'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="btn-box">
+      <div class="full-width text-right">
+        <button mat-flat-button class="app-primary-button" (click)="onSaveMoreUsers()">Save</button>
+        <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+      </div>
+    </div>
+    <!-- <button mat-raised-button color="primary" class="pull-right" (click)="onSaveUserLimit()">Save</button> -->
+  </div>
+
+</ng-template>
+<ng-template #editStatus>
+  <div class="popup-small">
+    <form [formGroup]="editStatusForm">
+      <div mat-dialog-content>
+        <div class="form-group full-width">
+          <mat-label>Edit Satus</mat-label>
+          <mat-select formControlName="Status">
+            <mat-option *ngFor="let element of status " [value]=element.status>
+              {{element.value}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+          <button mat-flat-button class="app-primary-button" (click)="EditStatus()" [disabled]="editStatusForm.controls.Status.errors?.required">Save</button>
+          <button mat-flat-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<!-- <ng-template #successInvoice>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">Invoice Generated Successfully</h2>
+
+    <div mat-dialog-content>
+
+      <p>Invoice generated <span class="confirmationFont">{{generatedInvoice}}</span> and you will email for
+        this invoice shortly to pay and use Services.
+        <br><br>
+        Check billing sections for more details and updates.
+        <br><br>
+        visit <a (click)="finalOkClick(1)">How To Use Services</a>
+        <br><br>
+        or <a (click)="download()">Download Document</a>
+      </p>
+
+    </div>
+    <div class="header-action-box appClearfix">
+      <div class="right-box">
+        <button mat-raised-button class="app-secondary-button" (click)="finalOkClick(0)">ok</button>
+      </div>
+    </div>
+  </div>
+</ng-template> -->

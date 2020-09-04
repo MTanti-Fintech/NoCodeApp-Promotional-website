@@ -1,0 +1,31 @@
+export class UserDetails {
+    MustChangePassword: number;
+    CommunicationEmail: string;
+    PasswordExpiresIn: number;
+    ActivationDate: string;
+    ActivationDateTime: Date;
+    UserActionType: string;
+    Expiry: string;
+    ActivationCode: string;
+    Token: string;
+    ClientLocationID: number;
+    TraderShortCode: string;
+    ProductId: number;
+    IsActive: number;
+    IsEnabled: number;
+    IsTestUser: number;
+    ClientName: string;
+    ProductName: string;
+    UserRole: string;
+    retryCount: string;
+    FirstName: string;
+    EmailID: string;
+    UserID: number;
+    IsDefaultProduct: number;
+    ClientMnemonic: string;
+    Lastname: string;
+    DepartmentId: number;
+    MachineType: number;
+    password: string;
+    PhoneNo: string;
+}

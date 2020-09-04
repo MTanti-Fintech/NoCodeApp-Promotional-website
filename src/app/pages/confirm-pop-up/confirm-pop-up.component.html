@@ -1,0 +1,12 @@
+<mat-dialog-content>
+    <h2>We would love to know more about you!</h2>    
+    <p>
+            {{message}}
+        </p>
+       <p>Click yes to answer click No to close this dialog.</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center" class="clearfix">
+        <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1" class="login100-form-btn pull-left m-r-15">{{confirmButtonText}}</button>
+        <button mat-raised-button mat-dialog-close tabindex="-1" class="btn-secondary login100-form-btn pull-left">{{cancelButtonText}}</button>
+    </mat-dialog-actions>
+    <!-- <p>its works</p> -->

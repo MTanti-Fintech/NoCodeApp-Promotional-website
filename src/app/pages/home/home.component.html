@@ -1,0 +1,709 @@
+<div class="main-wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <div>
+          <a href="#" class="No Code App-logo"
+            ><img src="assets/images/no-code-app-logo.svg" />
+          </a>
+        </div>
+
+        <div class="ScrollMenu justify-content-end">
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'home'"
+            href="#home"
+            >Home<span class="sr-only">(current)</span></a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'how'"
+            href="#how"
+            >How</a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'features'"
+            href="#features"
+            >Features</a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'plans'"
+            href="#plans"
+            >Plans</a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'comments'"
+            href="#comments"
+            >Comments</a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'faq'"
+            href="#faq"
+            >FAQ</a
+          >
+          <a
+            pageScroll
+            class="nav-item"
+            [class.active]="selectedMenu == 'contactus'"
+            href="#contactus"
+            >Contact Us</a
+          >
+        </div>
+        <!-- <div
+          class="hidden-phone collapse navbar-collapse justify-content-end"
+          id="navbarNavDropdown"
+        >
+          <ul class="nav navbar-nav">
+            <li class="nav-item" [class.active]="selectedMenu == 'home'">
+              <a pageScroll class="nav-link" href="#home"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'how'">
+              <a pageScroll [pageScrollOffset]="70" class="nav-link" href="#how"
+                >How</a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'features'">
+              <a
+                pageScroll
+                [pageScrollOffset]="70"
+                class="nav-link"
+                href="#features"
+                >Features</a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'plans'">
+              <a
+                pageScroll
+                [pageScrollOffset]="70"
+                class="nav-link"
+                href="#plans"
+                >Plans</a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'comments'">
+              <a
+                pageScroll
+                [pageScrollOffset]="70"
+                class="nav-link"
+                href="#comments"
+                >Comments</a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'faq'">
+              <a pageScroll [pageScrollOffset]="70" class="nav-link" href="#faq"
+                >FAQ</a
+              >
+            </li>
+            <li class="nav-item" [class.active]="selectedMenu == 'contactus'">
+              <a pageScroll class="nav-link" href="#contactus">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a pageScroll class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </nav>
+  </header>
+
+  <section
+    class="banner-section common-padding"
+    id="home"
+    track-onScroll
+    [trackEle]="'home'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="hills-layer"></div>
+    <div class="clouds-layer"></div>
+    <div class="color-layer"></div>
+    <div class="container">
+      <div class="text-content">
+        <h2>Build Your App Today</h2>
+        <p>
+          No code to write<br />
+          Build app in minutes.<br />
+          Publish your content<br />
+          Start tracking usage
+        </p>
+        <button pageScroll class="btn round-btn" href="#contactus">
+          Contact Us
+        </button>
+        <a
+          href="http://nocodeapp-newui.s3-website-us-east-1.amazonaws.com/login"
+        >
+          <button class="btn round-btn">Sign Up</button>
+        </a>
+      </div>
+      <div class="container">
+        <img
+          class="banner-img"
+          src="assets/images/anywhereWork.png"
+          alt="banner image"
+        />
+      </div>
+    </div>
+  </section>
+  <section
+    class="section-how common-padding"
+    id="how"
+    track-onScroll
+    [trackEle]="'how'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container">
+      <h2 class="common-header">How it works</h2>
+      <p class="feature-description">
+        Do it yourself, easy to use web portal. Build and deploy your Android
+        and iOS Apps in minutes.<br /><br />
+      </p>
+      <ul>
+        <li>Create an account.</li>
+        <li>Upload your logo. Pick the App Name, Choose Color Style.</li>
+        <li>Press Deploy.You are done.</li>
+      </ul>
+      <p class="feature-description"><br />You may now publish your Stories.</p>
+      <!-- <ul>
+          Do it yourself, easy to use web portal. Build and deploy your Android
+          and iOS Apps in minutes.
+          <li>Create an account.</li>
+          <li>Upload your logo. Pick the App Name, Choose Color Style.</li>
+          <li>Press Deploy. You are done.</li>
+          <li>You may now publish your Stories.</li>
+        </ul> -->
+    </div>
+    <!-- <img
+      class="bg-cloud cloud1"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud2"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud3"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud4"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud5"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    /> -->
+  </section>
+
+  <section
+    class="section-features common-padding"
+    id="features"
+    track-onScroll
+    [trackEle]="'features'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container-fluid">
+      <h2 class="common-header">Features</h2>
+      <div class="feature-group">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">No Code To Write</h4>
+              <p class="feature-description">
+                True No-Code-App. Guaranteed, you do not need to know any
+                programming or technical jargon. Your app will be ready to test
+                on your device in minutes. Any customer worldwide would be able
+                to access the app on Android or iOS device as soon as the app is
+                approved published by Google/Apple. Get your message out
+                instantaneously.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <img
+              class="responsive"
+              src="assets/images/features_photo_first.webp"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <img
+              class="responsive"
+              src="assets/images/features_photo_second.png"
+            />
+          </div>
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">Publish. Engage. Make money.</h4>
+              <p class="feature-description">
+                Select a picture. Create headline, Create Short description.
+                Create link for details. Press publish! Get your message out.
+                Ask questions or seek opinion. Create Sponsored content and
+                publish in minutes. Create full page beautiful Ads, publish in
+                minutes.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">Business Intelligence</h4>
+              <p class="feature-description">
+                Analyze what stories interest people. Which stories are most
+                read, analyzed. Analyzie which User spends how much time in the
+                App doing what. Analyze Surveys/Questions and results. Analyze
+                Advertisement traction.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <img
+              class="responsive"
+              src="assets/images/features_photo_third.webp"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <img
+      class="bg-cloud cloud1"
+      src="assets/images/featureCloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud2"
+      src="assets/images/featureCircle1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud3"
+      src="assets/images/featureCloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud4"
+      src="assets/images/featureCircle1.svg"
+      alt="background cloud"
+    /> -->
+  </section>
+
+  <section
+    class="section-plans common-padding"
+    id="plans"
+    track-onScroll
+    [trackEle]="'plans'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container">
+      <h2 class="common-header">Plans</h2>
+      <div class="row">
+        <div class="col-sm-3 feature-detail-main justify-content-center box">
+          <!-- <img
+            class="mx-auto d-block responsive"
+            src="assets/images/type-1-plan.webp"
+          /> -->
+          <div class="box">
+            <h1 class="feature-title">FREE</h1>
+            <h3 class="feature-title">No Cost Ever</h3>
+            <p class="feature-description">
+              Build and deploy your Apps for free as long as you have less than
+              10 users and publish no more than three items in a week. FREE Ads.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3 feature-detail-main justify-content-center">
+          <!-- <img
+            class="mx-auto d-block responsive"
+            src="assets/images/type-2-plan.webp"
+          /> -->
+          <div class="box">
+            <h1 class="feature-title">SMALL</h1>
+            <h3 class="feature-title" id="small-plan">$99/MO, $990/YR</h3>
+            <p class="feature-description">
+              Upto 100 Users, Publish 25 Items/Week. Unlimited surveys FREE Ads.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3 feature-detail-main justify-content-center">
+          <!-- <img
+            class="mx-auto d-block responsive"
+            src="assets/images/type-3-plan.webp"
+          /> -->
+          <div class="box">
+            <h1 class="feature-title">MEDIUM</h1>
+            <h3 class="feature-title" id="medium-plan">$449/MO, $4,490/YR</h3>
+            <p class="feature-description">
+              Upto 1000 Users, Publisg 250 Items/Week. Unlimited Surveys, Paid
+              Ads.
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3 feature-detail-main justify-content-center">
+          <!-- <img
+            class="mx-auto d-block responsive"
+            src="assets/images/type-4-plan.webp"
+          /> -->
+          <div class="box">
+            <h1 class="feature-title">ENTERPRISE</h1>
+            <h3 class="feature-title">Call</h3>
+            <p class="feature-description">
+              We will customize plans based on your business needs. We will
+              customize features you may need as well.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="product-comp-tbl table-responsive">
+        <table class="table comp-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>FREE</th>
+              <th>SMALL</th>
+              <th>MEDIUM</th>
+              <th>ENTERPRISE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>User messages(Per month)</td>
+              <td>
+                <span>100</span>
+              </td>
+              <td>
+                <span> 10000 </span>
+              </td>
+              <td>
+                <span> 1000000 </span>
+              </td>
+              <td>
+                <span class="material-icons"> remove </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Owner Ads</td>
+              <td>
+                <span> No </span>
+              </td>
+              <td>
+                <span> No </span>
+              </td>
+              <td>
+                <span> Yes </span>
+              </td>
+              <td>
+                <span class="material-icons"> remove </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Platform ads</td>
+              <td>
+                <span> Yes </span>
+              </td>
+              <td>
+                <span> Yes </span>
+              </td>
+              <td>
+                <span> No </span>
+              </td>
+              <td>
+                <span class="material-icons"> remove </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Surveys</td>
+              <td>
+                <span> None </span>
+              </td>
+              <td>
+                <span> Unlimited </span>
+              </td>
+              <td>
+                <span> Unlimited </span>
+              </td>
+              <td>
+                <span class="material-icons"> remove </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Analytics</td>
+              <td>
+                <span> No </span>
+              </td>
+              <td>
+                <span> Yes </span>
+              </td>
+              <td>
+                <span> Yes </span>
+              </td>
+              <td>
+                <span class="material-icons"> remove </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Price</td>
+              <td>
+                <span> Free </span>
+              </td>
+              <td>
+                <span> $99/Mo , $990/Yr </span>
+              </td>
+              <td>
+                <span> $499/Mo , $4990/Yr </span>
+              </td>
+              <td>
+                <span> Call </span>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+    <!-- <img
+      class="bg-cloud cloud1"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud2"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud3"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud4"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud5"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    /> -->
+  </section>
+  <section
+    class="section-comments common-padding"
+    id="comments"
+    track-onScroll
+    [trackEle]="'comments'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container">
+      <h2 class="common-header">
+        Comments
+        <p>Thousands of Apps built and deployed. A lot of happy customers.</p>
+      </h2>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="keypoint">
+            <p>
+              "Staying in touch with Kids and parents of my School was a
+              difficult task. The application is amazing in how it allows me to
+              stay in touch and get feedback. I was up and running in minutes."
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="keypoint">
+            <p>
+              " No technical background, I can not believe I built and deployed
+              my App in minutes. I am updating my contents daily within seconds.
+              Must try to believe it."
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="keypoint">
+            <p>
+              " I have been publishing my newsletter for years now. My content
+              looks much better. I now know better what my readers like. I can
+              monetize my effort that i was never able to before."
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="keypoint">
+            <p>
+              "In the current situation, getting the message out to my team in a
+              timely fashion hasd been very difficult until I built and deployed
+              my App in minutes. Now I can stay in touch effectively and can
+              easily find out who may not have seen my message. Geat job."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="section-faq common-padding"
+    id="faq"
+    track-onScroll
+    [trackEle]="'faq'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container-fluid">
+      <h2 class="common-header">FAQ</h2>
+      <div class="feature-group">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">How do I get started?</h4>
+              <p class="feature-description">
+                Open an account, login, provide billing details, select a
+                template or create one and get started. The App will be ready
+                for you to test within minutes. It is truly no code app. You
+                absolutely do not need any prohramming knowledge.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">When can my audience enage?</h4>
+              <p class="feature-description">
+                Google and Apple usually take 24-48 hours to approve application
+                to be downloadable. Your audience can download your app.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">
+                Can you help manage content and monetize?
+              </h4>
+              <p class="feature-description">
+                Yes, we offer a white glove service with 24x7 Help and
+                operations desk that can take your messages or work with you to
+                generate and publish gorgeous looking content. Please contact us
+                for the charges.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 feature-detail-main">
+            <div class="feature-details">
+              <h4 class="feature-title">Can I get the App customized?</h4>
+              <p class="feature-description">
+                Yes, we can customize features based on your business needs.
+                Please contact us for a quick turn around of your customization
+                needs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <img
+      class="bg-cloud cloud1"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud2"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud3"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud4"
+      src="assets/images/black-bg-cloud2.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud5"
+      src="assets/images/black-bg-cloud1.svg"
+      alt="background cloud"
+    /> -->
+  </section>
+
+  <section
+    class="section-contactUs common-padding"
+    id="contactus"
+    track-onScroll
+    [trackEle]="'contactus'"
+    (selectMenu)="highlightMenuOnScroll($event)"
+  >
+    <div class="container p-b-50">
+      <h2 class="common-header">Contact Us</h2>
+      <div class="row">
+        <div class="col-sm-4">
+          <ul class="contact-details">
+            <li class="pad-top-0">
+              <i>
+                <img src="assets/images/contactCallBlack.webp" alt="" />
+              </i>
+              +1-646-688-7500 <br />+91-966-212-0909
+            </li>
+            <li>
+              <i>
+                <img src="assets/images/contactMailBlack.svg" alt="" />
+              </i>
+              interested@nocodeapp.center
+            </li>
+            <li>
+              <i>
+                <img src="assets/images/contactLocationBlack.png" alt="" />
+              </i>
+              6 Sire Stakes Dr Tinton Falls,<br />NJ 0772
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-8">
+          <app-ContactUs></app-ContactUs>
+        </div>
+      </div>
+      <div class="company-info">
+        <img src="assets/images/logo_PNG.png" alt="FINTECH Logo" />
+        <p class="sub-text">
+          TRUSTED BY FIN-TECH INDUSTRY FOR MORE THAN TWO DECADES
+        </p>
+        <p>
+          Fintech Global Center has been serving the global financial industry
+          for over two decades.
+        </p>
+        <p>
+          Our expertise includes building complete front to back trading
+          systems.
+        </p>
+      </div>
+    </div>
+    <footer>Copyright © 2020 All rights reserved</footer>
+    <!-- <img
+      class="bg-cloud cloud1"
+      src="assets/images/featureCloud1.svg"
+      alt="background cloud"
+    />
+    <img
+      class="bg-cloud cloud2"
+      src="assets/images/featureCloud1.svg"
+      alt="background cloud"
+    /> -->
+  </section>
+</div>

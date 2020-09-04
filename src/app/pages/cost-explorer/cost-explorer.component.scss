@@ -1,0 +1,71 @@
+.cost-explorer-main {
+    .cost-comp-tile {
+        .content {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .incDec-ctrl-wrapper {
+            .ctrl-title {
+                margin-bottom: 5px;
+                font-size: 14px;
+                display: inline-block;
+                line-height: 35px;
+            }
+
+            .incDec-ctrl input {
+                height: 40px;
+                padding: 10px 10px;
+            }
+
+            button.incDec-button {
+                // top: 6px;
+            }
+        }
+    }
+
+    .calc-col {
+        max-width: 354px;
+    }
+
+    .comp-wrapper {
+        padding-top: 37px;
+        border-top: 1px solid #eee;
+        margin-top: 30px;
+        padding-left: 40px;
+
+        .comp-box {
+            display: inline-block;
+            width: 240px;
+            text-align: center;
+            border: 1px solid #d1d1d1;
+            margin-right: 40px;
+            .box-title {
+                margin: 0;
+                padding: 0;
+                line-height: 42px;
+                font-size: 18px;
+                font-weight: 600;
+                color: #EE7B11;
+                border-bottom: 1px solid #d1d1d1;
+            }
+
+            p.value {
+                margin: 0;
+                padding: 0;
+                font-size: 30px;
+                padding: 18px 0;
+            }
+        }
+    }
+    .inner-header {
+        margin-bottom: 12px !important;
+        font-size: 16px;
+        line-height: 47px !important;
+        color: #EE7B11;
+    }
+    .btn-box{
+        padding: 0 40px;
+    margin-top: 25px;
+    }
+}

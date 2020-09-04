@@ -1,0 +1,109 @@
+<div class="popup-large bulkupload-popup">
+    <header>
+        <h2 class="popup-title text-center">Bulk Upload</h2>
+    </header>
+    <form #importUsersForm="ngForm" id="importUsersForm" name="importUsersMainForm" autocomplete="off"
+    (ngSubmit)="onSubmitImportOnPremisesUsers(importUsersForm)">
+        <mat-dialog-content>
+            <h2 class="popup-title">
+                Step 1. Download CSV template (optional)
+            </h2>
+            <ul class="table-links ">
+                <li>
+                    <a [href]="fileUrl" download="template.csv">
+                        <span class="material-icons"> get_app </span>
+                        Download Template
+                    </a>
+                </li>
+            </ul>
+            <h2 class="popup-title">
+                Step 2. Upload your CSV file
+            </h2>
+            <ul class="table-links ">
+                
+                <li>
+                    <!-- <label for="csvFileUpload">Upload CSV:</label> -->
+                    <a href="javascript:void(0)" class="common-file-upload">
+                        <span class="material-icons">description</span>
+                        Choose File
+                        <input type='file' name='csvFileUpload' value="Upload CSV" #csvReader id="csvFileUpload"
+                            (change)="uploadListener($event)" accept=".csv">
+                    </a>
+                    <label style="color: red;" csvUploadError id="csvUploadError1" *ngIf="fileExtensionError">
+                        Invalid File Extension
+                    </label>
+                    <label style="color: red;" csvUploadError id="csvUploadError2" *ngIf="fileColumnError">
+                        Invalid Column Count
+                    </label>
+                    <label style="color: red;" csvUploadError id="csvUploadError3" *ngIf="fileMissingDataError">
+                        Missing Required Field Data
+                    </label>
+                </li>
+            </ul>
+            <h2 class="popup-title">
+                Step 3. Select users  <B style="color: black;">
+                    ( Balance : {{data.capacity}} Users)
+                </B>
+                <div class="pull-right">
+                    <!-- <div class="form-group"> -->
+                      <input matInput (keyup)="applyFilterStep($event)" placeholder="Search" class="search-icon" style="color: black;">
+                    <!-- </div> -->
+                  </div>
+                
+            </h2>
+            <div>
+                <div class="clearfix">
+                    <div class="common-grid-box">
+                        <div class="tbl-scroll-container">
+                            <table mat-table [dataSource]="uploadedFileDataSource" matSort #importUsersSort="matSort"
+                                class='import-user-table'>
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <ng-container matColumnDef="select">
+                                    <th mat-header-cell *matHeaderCellDef class='mat-column-select'>
+                                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                                            [checked]="selection.hasValue() && isAllSelected()"
+                                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                        </mat-checkbox>
+                                    </th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                            (change)="changeCount($event,row)"
+                                            [disabled]="!row.isValid"
+                                            [checked]="selection.isSelected(row)">
+                                        </mat-checkbox>
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column.field">
+                                    <th mat-header-cell *matHeaderCellDef [ngClass]='column.class'>
+                                        {{ column.name }}
+                                    </th>
+                                    <td mat-cell *matCellDef="let row" >
+                                        {{ row[column.field] }}
+                                    </td>
+                                    <!-- <td mat-cell *matCellDef="let row" *ngIf="!row['isValid']">
+                                        {{ row[column.field] }}
+                                    </td> -->
+                                </ng-container>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                                [ngClass]="{'rowcolor': !row.isValid}"></tr>
+                            </table>
+                        </div>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" #importUsersPaginator></mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <!-- <mat-dialog-actions align="end">
+                <button mat-flat-button type="submit" cdkFocusInitial color="primary">Save</button>
+                <button mat-flat-button type="button" cdkFocusInitial color="primary"
+                [mat-dialog-close]="true">Close</button>
+            </mat-dialog-actions> -->
+        </mat-dialog-content>
+        <div mat-dialog-actions class="btn-box">
+            <div class="full-width text-right">
+                <button mat-flat-button class="app-primary-button" type="submit" cdkFocusInitial >Save</button>
+                <button mat-flat-button class="app-secondary-button" type="button" cdkFocusInitial 
+                    (click)="closeOnPremisesUsersBulkUploadDialog()">Close</button>
+            </div>
+        </div>
+    </form>
+</div>

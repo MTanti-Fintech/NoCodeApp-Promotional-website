@@ -1,0 +1,331 @@
+.confirmationFont{
+    color:orange;
+    font-size: 16px;
+    font-weight: 600;
+}
+.UTCFont{
+    color:orange;
+}
+.org-popup{
+    width: 800px;
+    table{
+        width: 100%;
+    }
+    .picker{
+        z-index: 10 !important;
+    }
+    .timepicker
+    {
+        z-index: 10;
+        width: 500px;
+    }
+    .ng-tns-c24-13{
+        width: auto;
+    }
+    .timepicker[_ngcontent-wnu-c24]{
+        z-index: 10;
+        width: 500px;
+    }
+    h2{
+        color: #EE7B11;
+        border-bottom: 1px solid rgb(216, 216, 216);
+        line-height: 47px;
+        margin-bottom: 25px;
+    }
+    h3{
+        color: #EE7B11;
+        font-size: 17px;
+        font-weight: 700;
+        height: 55px;
+        margin-bottom: 10px;
+        line-height: 55px;
+        button{
+            color: #3D3D3D;
+        }
+    }
+    .mat-horizontal-content-container{
+        padding: 0 !important;
+    }
+    .login100-form-btn{
+        width: 48%;
+        margin-right: 15px !important;
+    }
+    .login100-form-btn.send-org-details{
+        background-color: #EC8320;
+        color: white;
+    }
+    .login100-form-btn.send-org-details:hover{
+        background-color:rgb(185, 94, 8);
+    }
+    /* mat-label{
+        margin-bottom: 10px;
+    } */
+    .clear-selection{
+        font-size: 11px;
+        color: white !important;
+        background: gray;
+        padding: 6px 8px;
+        /* position: relative;
+        top: -71px;
+        right: -260px; */
+        float:right;
+    }
+    .users-count, .show-amount{
+        /* border: 1px solid; */
+        padding: 15px 20px;
+        /* background: #ebebeb; */
+        border: 1px solid #ebebeb;
+        font-size: 12px;
+        margin-right: 5px;
+        /* width: 50px !important;*/
+        font-weight: 600;
+        width: 24%;
+        display: inline-block;
+        text-align: center;
+    }
+    .show-amount{
+        background: rgb(78, 78, 78);
+        color: white;
+    }
+    .mat-slider-horizontal{
+        min-width: 97%;
+    }
+    .user-numbers{
+        color: #EC8320;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .add-user-small-btn{
+        background: #EC8320;
+        color: white;
+        padding: 5px 10px 5px 5px;
+    }
+    .add-user-small-btn span{
+        font-size: 16px;
+        position: relative;
+        top: 3px;
+    }
+    .signup-form-section {
+        border: 5px solid rgb(192, 175, 160);
+        padding: 40px 20px 20px 20px;
+        position: relative;
+    }
+    .signup-form-section h2{
+        color:#EC8320;
+        background-color: white;
+        position: absolute;
+        top: -26px;
+        padding: 0px 5px;
+        margin-bottom: 0px;
+        border-bottom: 0px;
+        font-size: 20px;
+    }
+    .email-tooltip{
+        position: relative;
+    }
+    .email-tooltip span{
+        position:absolute;
+        top: 34px;
+        right: 10px;
+        color: #747474;
+        font-size: 20px;
+    }
+
+}
+
+::ng-deep .org-popup-main {
+    .mat-dialog-container{
+        height: auto;
+        padding: 8px 35px 0px 35px;
+    }
+    .org-popup{
+        .mat-pseudo-checkbox-checked{
+            background:#EC8320 !important;
+        }
+        .mat-horizontal-content-container{
+            padding: 0px;
+            padding-top: 15px;
+            margin: 0 -35px;
+            padding-left: 35px;
+            padding-right: 35px;
+            max-height: 462px;
+            overflow-y: auto;
+        }
+         .mat-step-header{
+            background:#F2F2F2;
+            border-radius: 40px;
+            border: 1px solid #CBCBCB;
+            &[aria-selected="true"]{
+                background-color: #EC8320;
+                border-color: #EC8320;
+                .mat-step-icon-selected{
+                    background-color: #6C3C0F;
+                }
+                .mat-step-label{
+                    color: #5c2e02;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .header-action-box{
+            margin-bottom: 15px;
+        }
+        .mat-tab-group{
+            margin-bottom: 20px;
+        }
+        .mat-stepper-horizontal{
+            .mat-horizontal-stepper-header-container{
+                margin-bottom: 15px;
+            }
+        }
+        .days-select{
+            padding-top: 15px;
+            mat-checkbox{
+                display: inline-block;
+                min-width: 120px;
+                .mat-checkbox-label{
+                    color: #707070;
+                }
+            }
+        }
+        .selected-days{
+            margin-bottom: 5px;
+            label{
+                display: inline-block;
+                height: 20px;
+                line-height: 20px;
+                font-size: 11px;
+                color: #fff;
+                background: #2DCC70;
+                padding: 1px 5px;
+                margin-right: 3px;
+                
+            }
+            .disable{
+                display: inline;
+                font-size: 11px;
+                font-weight: 500;
+                margin-right: 5px;
+                color:white;
+                background-color:  rgb(173, 173, 173);
+                padding: 2px 5px;
+            }
+        }
+        p.selected-time{
+            font-size: 12px;
+            font-weight: 700;
+            color: #EE7D14;
+        }
+        .form-group{
+            .material-icons.mat-datepicker-toggle{
+                position: absolute;
+                right: 13px;
+                top: 24px;
+            }
+            p{
+                padding-bottom: 0px;
+                margin-bottom: 5px;
+            }
+        }
+        .info-section{
+            border-bottom: 1px solid #E8E8E8;
+            &.footer-section{
+                border-bottom: none;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+        p.discount{
+            color: #DB1818;
+            margin-bottom: 0px;
+        }
+        .bill-info{
+            del{
+                color: #A3A3A3;
+            }
+            p{
+                padding-bottom: 0px;
+                line-height: normal;
+                margin-bottom: 4px;
+                span, del{
+                    display: inline-block;
+                    min-width: 132px;
+                    text-align: left;
+                }
+            }
+            p.bill-amt{
+                font-size: 25px;
+                font-weight: 700;
+                color:#144B70;
+                span{
+                    color: #3D3D3D;
+                }
+            }
+            p.savings{
+                color: #14A652;
+                font-size: 13px;
+                span{
+                    font-weight: 700;
+                }
+            }
+            p.other-info{
+                font-size: 13px;
+                color: #8D8D8D;
+                margin: 0;
+            }
+        }
+        .first-col{
+            flex: 0 0 32%;
+            max-width: 30%;
+        }
+        .input-text-group{
+            position: relative;
+            padding-right: 160px;
+            .after-text{
+                display: inline-block;
+                vertical-align: middle;
+                color: rgba(102, 102, 102, 0.4);
+                position: absolute;
+                font-size: 23px;
+                right: 0px;
+                top: 20px;
+                margin-left: 11px;
+            }
+        }
+        .bill-info{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .bill-details{
+            .bill-values {
+                display: flex;
+                align-items: center;
+                line-height: normal;
+                margin-bottom: 10px;
+                label {
+                    width: 100px;
+                    font-size: 16px;
+                    margin-bottom: 0 !important;
+                    padding-bottom: 0;
+                    line-height: normal;
+                    color: #EE7B11;
+                }
+                .value {
+                    padding-left: 18px;
+                    font-size: 16px;
+                    line-height: normal;
+                    width: 115px;
+                    text-align: left;
+                    color: #A3A3A3;
+                    &.big-value{
+                        font-size: 24px;
+                        color: #010101;
+                    }
+                }
+            }
+        }
+    }
+}
+

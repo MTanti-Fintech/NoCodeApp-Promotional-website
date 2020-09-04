@@ -1,0 +1,289 @@
+<div class="contact-form">
+  <form
+    *ngIf="isShow"
+    [formGroup]="ContactUsForm"
+    (ngSubmit)="onContactUsSubmit()"
+  >
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="firstname"
+            placeholder="First Name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
+          />
+          <div
+            *ngIf="
+              ContactUsForm.controls['firstname'].invalid &&
+              (ContactUsForm.controls['firstname'].dirty ||
+                ContactUsForm.controls['firstname'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="ContactUsForm.controls['firstname'].errors.required">
+              First Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="lastname"
+            placeholder="Last Name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+          />
+          <div
+            *ngIf="
+              ContactUsForm.controls['lastname'].invalid &&
+              (ContactUsForm.controls['lastname'].dirty ||
+                ContactUsForm.controls['lastname'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="ContactUsForm.controls['lastname'].errors.required">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="Email"
+            ngModel
+            email="true"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
+          <div
+            *ngIf="
+              ContactUsForm.controls['email'].invalid &&
+              (ContactUsForm.controls['email'].dirty ||
+                ContactUsForm.controls['email'].touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="ContactUsForm.controls['email'].errors.required">
+              Email is required
+            </div>
+            <div *ngIf="ContactUsForm.controls['email'].errors.pattern">
+              Enter valid email address
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="messege"
+            class="form-control"
+            placeholder="Messege"
+            [ngClass]="{ 'is-invalid': submitted && f.messege.errors }"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <button class="btn btn-primary">Send Message</button>
+        <!-- <button class="btn btn-secondary" (onclick)="FaqPopup()">FAQ</button> -->
+      </div>
+    </div>
+  </form>
+  <form
+    *ngIf="isNotShow"
+    [formGroup]="OnbardingForm"
+    (ngSubmit)="onOnboardingSubmit()"
+  >
+    <h2>Onboarding Questions</h2>
+    <div class="onboarding-form">
+      <div class="row">
+        <div class="col-sm-6" class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl"
+              >What is the size of your organization?</label
+            >
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input
+                  checked="true"
+                  class="form-check-input"
+                  formControlName="sizeOfOrganization"
+                  type="radio"
+                  value="0 - 5"
+                />
+                <label class="form-check-label">0 - 5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  formControlName="sizeOfOrganization"
+                  type="radio"
+                  value="6 - 15"
+                />
+                <label class="form-check-label">6 - 15</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  formControlName="sizeOfOrganization"
+                  type="radio"
+                  value="15 - 50"
+                />
+                <label class="form-check-label">15 - 50</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  formControlName="sizeOfOrganization"
+                  type="radio"
+                  value="> 50"
+                />
+                <label class="form-check-label">50+</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl"
+              >How many machines do you need for your employees? (One machine
+              can be used by multiple people at the same time)</label
+            >
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="ctrl-sub-lbl"
+                    >No of light usage employees like HR-Admin</label
+                  >
+                  <input
+                    type="number"
+                    formControlName="lightUsage"
+                    class="form-control"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="ctrl-sub-lbl"
+                    >No of medium usage employees like Web developers</label
+                  >
+                  <input
+                    type="number"
+                    formControlName="mediumUsage"
+                    class="form-control"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="ctrl-sub-lbl"
+                    >No of heavy usage employees like UI-UX Designer</label
+                  >
+                  <input
+                    type="number"
+                    formControlName="largeUsage"
+                    class="form-control"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl"
+              >Do you already have office or domain? (Can we rewrite the
+              question, I’m not sure I understand the question here as a client
+              )</label
+            >
+            <input
+              type="text"
+              formControlName="officeOrDomain"
+              class="form-control"
+              placeholder="officebcp.com"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl"
+              >At which location most of your employees are working at?</label
+            >
+            <input
+              type="text"
+              formControlName="location"
+              class="form-control"
+              placeholder="USA"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl">Contact Number</label>
+            <input
+              type="text"
+              formControlName="contactNo"
+              class="form-control"
+              placeholder="123-456-789"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl">Preferred time to call</label>
+            <input
+              type="time"
+              formControlName="time"
+              class="form-control"
+              placeholder="11:30 AM"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="ctrl-lbl">Additional requirements/comments</label>
+            <input
+              type="text"
+              formControlName="comments"
+              class="form-control"
+              placeholder="Messaging, Calling etc"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 onboarding-form">
+          <button class="btn btn-primary m-r-15">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

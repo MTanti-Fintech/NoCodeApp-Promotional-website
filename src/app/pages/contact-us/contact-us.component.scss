@@ -1,0 +1,43 @@
+.faq-content h3 {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #dddddd;
+  color: #ec8320;
+}
+.btn-primary {
+  color: white;
+}
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+mat-panel-title {
+  font-weight: 500;
+}
+
+.form-group .alert-danger {
+  color: red;
+  font-size: 11px;
+  font-weight: 600;
+}
+.form-group label {
+  font-size: 13px;
+  color: white;
+  padding-bottom: 3px;
+}
+.faq-content .form-group .form-control {
+  padding-left: 35px;
+}
+.form-control.search-icon {
+  background: url(../../../assets/images/search-black.svg) no-repeat 9px 11px;
+  background-size: auto;
+}
+.onboarding-form {
+  background-color: #ba5412;
+  padding: 20px;
+}
+.contact-form h2 {
+  color: white;
+}
+// .onboarding-form button{
+//   margin-right: 5px !important;
+// }

@@ -1,0 +1,119 @@
+<form
+  class="signup-popup"
+  #Organizationform="ngForm"
+  (ngSubmit)="onSubmit(Organizationform)"
+>
+  <span class="login100-form-title"> SignUp </span>
+  <p class="sub-text">Sign up and get eligible for 7 days free trial</p>
+  <!-- Organization -->
+  <div class="m-b-10 clearfix">
+    <h2 class="">Organization</h2>
+    <div class="form-group pull-left clearfix">
+      <mat-label for="Orgname">Organization Name *</mat-label>
+      <input
+        class="form-control"
+        name="Orgname"
+        ngModel
+        #orgname="ngModel"
+        required
+        matInput
+        FocusElement
+        placeholder="NoCodeApp"
+      />
+      <mat-error *ngIf="orgname.errors?.required && orgname.touched">
+        Organization Name is required.
+      </mat-error>
+    </div>
+    <div class="form-group email-tooltip pull-right">
+      <mat-label for="commemail">Communication Email *</mat-label>
+      <input
+        class="form-control"
+        matInput
+        FocusElement
+        name="commemail"
+        ngModel
+        required
+        #commemail="ngModel"
+        type="email"
+        email
+        placeholder="johndeo@company.com"
+      />
+      <span
+        class="material-icons"
+        matTooltip="Communication email is going to use to send monthly/yearly invoices to the organization"
+      >
+        new_releases
+      </span>
+      <mat-error *ngIf="commemail.touched && commemail.errors?.email">
+        Communication Email is Invalid!
+      </mat-error>
+      <mat-error *ngIf="commemail.touched && commemail.errors?.required">
+        Communication Email is <strong>required</strong>
+      </mat-error>
+    </div>
+  </div>
+  <div class="form-group email-tooltip clearfix">
+    <mat-label for="Orgdomain">Organization Domain *</mat-label>
+    <div class="input-text-group">
+      <input
+        class="form-control"
+        name="Orgdomain"
+        ngModel
+        #orgdomain="ngModel"
+        required
+        matInput
+        placeholder="company"
+      />
+      <strong class="after-text">.nocodeapp.center</strong>
+    </div>
+    <mat-error *ngIf="orgdomain.errors?.required && orgdomain.touched">
+      Organization Domain is required.
+    </mat-error>
+  </div>
+  <!-- Admin -->
+  <div class="clearfix m-b-10">
+    <h2>Admin</h2>
+    <div class="form-group pull-left">
+      <mat-label for="fullname">Full Name *</mat-label>
+      <input
+        class="form-control"
+        name="fullname"
+        ngModel
+        #fullname="ngModel"
+        required
+        matInput
+        FocusElement
+        placeholder="Deo L John"
+      />
+    </div>
+
+    <div class="form-group pull-right">
+      <mat-label for="adminemail">Email *</mat-label>
+      <input
+        class="form-control"
+        matInput
+        FocusElement
+        name="adminemail"
+        ngModel
+        required
+        #adminemail="ngModel"
+        type="email"
+        email
+        placeholder="johndeo@company.com"
+      />
+      <mat-error *ngIf="adminemail.touched && adminemail.errors?.email">
+        Admin Email is Invalid!
+      </mat-error>
+      <mat-error *ngIf="adminemail.touched && adminemail.errors?.required">
+        Admin Email is <strong>required</strong>
+      </mat-error>
+    </div>
+  </div>
+  <div class="container-login100-form-btn">
+    <mat-error *ngIf="alreadyRegistered"> {{ Issues }} </mat-error>
+    <button type="submit" class="login100-form-btn">SignUp</button>
+    <!-- <mat-error *ngIf=alreadyRegistered>
+            {{ Issues }}
+        </mat-error> -->
+  </div>
+</form>

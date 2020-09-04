@@ -1,0 +1,119 @@
+<div class="main cost-explorer-main">
+  <div class="common-tile cost-comp-tile mat-elevation-z4">
+    <div class="header">
+      <div class="left-box">
+        <h2>Cost Explorer</h2>
+      </div>
+    </div>
+    <div class="content with-pad">
+      <form [formGroup]="costExplorerForm">
+        <h2 class="inner-header">
+          Step 1. Select Plan
+        </h2>
+        <div class="row">
+          <div class="col calc-col">
+            <div class="incDec-ctrl-wrapper ">
+              <!-- <h4 class="ctrl-title">Select Plan</h4> -->
+              <div class="form-group ddlSelectPlan">
+                <mat-select formControlName="model" (selectionChange)="onPlanChange()">
+                  <mat-option *ngFor="let item of models" [hidden]="item.Plan_Type_Mst_Id==1"
+                    [value]="item.Plan_Type_Mst_Id">
+                    {{item.Plan_Name}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="inner-header">
+          Step 2. Total number of Employees
+        </h2>
+        <div class="row">
+          <div class="col calc-col">
+            <div class="incDec-ctrl-wrapper">
+              <!-- <h4 class="ctrl-title">Total number of users</h4> -->
+              <div class="incDec-ctrl">
+                <button mat-icon-button class="incDec-button left">
+                  <mat-icon (click)="onDecrementNumberOfUser()">remove</mat-icon>
+                </button>
+                <input type="number" formControlName="users" (change)="onEmployeeNumberInputChange()" />
+                <button mat-icon-button class="incDec-button right">
+                  <mat-icon (click)="onIncrementNumberOfUser()">add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="inner-header">
+          Step 3. Internet consumption per Employee per day
+        </h2>
+        <div class="row">
+          <div class="col calc-col">
+            <div class="incDec-ctrl-wrapper">
+              <!-- <h4 class="ctrl-title">Internet consumption sper user per day</h4> -->
+              <div class="incDec-ctrl">
+                <button mat-icon-button class="incDec-button left">
+                  <mat-icon (click)="onDecrementInternet()">remove</mat-icon>
+                </button>
+                <input type="number" formControlName="internetUsage" (change)="onInternetUsageChage()" />
+                <button mat-icon-button class="incDec-button right">
+                  <mat-icon (click)="onIncrementInternet()">add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6">
+                <div class="example-full-width form-group">
+                  <mat-label>Select Plan </mat-label>
+                  <mat-select formControlName="model" (selectionChange)="onPlanChange()">
+                    <mat-option *ngFor="let item of models" [hidden]="item.Plan_Type_Mst_Id==1"
+                      [value]="item.Plan_Type_Mst_Id">
+                      {{item.Plan_Name}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div> -->
+          <!-- <div class="col calc-col">
+                <div class="incDec-ctrl-wrapper">
+                    <h4 class="ctrl-title">Select Plan</h4>
+                    <div class="incDec-ctrl">
+                      
+                    </div>
+                  </div>
+              </div> -->
+          <!-- <div class="col calc-col">
+                  <button mat-flat-button class="calculate-button app-primary-button">Calculate</button>
+              </div> -->
+        </div>
+      </form>
+      <div class="comp-wrapper">
+        <div class="comp-box">
+          <h4 class="box-title">
+            Monthly
+          </h4>
+          <p class="value">
+            $ {{monthlyAmount}}
+          </p>
+        </div>
+        <div class="comp-box">
+          <h4 class="box-title">
+            Yearly ({{yearlyDicount}}% discount)
+          </h4>
+          <p class="value">
+            $ {{yearlyAmount}}
+          </p>
+        </div>
+        <!-- <div class="comp-box">
+          <h4 class="box-title">
+            Description <small>(per month)</small>
+          </h4>
+          <p>
+            Internet Fees : $ {{internetCharge}}<br>
+            User Charge : $ {{userCharge}}
+          </p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <app-officebcp-footer></app-officebcp-footer>
+</div>

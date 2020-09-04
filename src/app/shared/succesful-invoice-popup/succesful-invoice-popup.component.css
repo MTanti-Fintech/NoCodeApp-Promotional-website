@@ -1,0 +1,13 @@
+.confirmationFont{
+    color:orange;
+    font-size: 14px;
+    font-weight: 500;
+}
+a{
+    color: blue;
+    font-size: 12px;
+
+}
+a:hover{
+    color:orange;
+}

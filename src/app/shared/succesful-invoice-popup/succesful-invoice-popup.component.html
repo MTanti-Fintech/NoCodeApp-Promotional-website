@@ -1,0 +1,20 @@
+<div class="popup-medium">
+  <h2 class="text-center popup-title">Invoice Generated Successfully</h2>
+
+  <div mat-dialog-content>
+
+    <p>Invoice: <span class="confirmationFont">{{generatedInvoice}}</span> has been generated.
+      <br><br>
+      You will receive an email with invoice and payment details.<br>
+      For more details please check the billing section.
+      <br><br>
+      Visit <a href="howUseServices"><u>How To Use Services </u></a>or <a href="overview" (click)="download()"><u>Download Userguide</u></a>.
+    </p>
+
+  </div>
+  <div class="header-action-box appClearfix">
+    <div class="right-box">
+      <button mat-raised-button class="app-secondary-button" (click)="finalOkClick(0)">ok</button>
+    </div>
+  </div>
+</div>

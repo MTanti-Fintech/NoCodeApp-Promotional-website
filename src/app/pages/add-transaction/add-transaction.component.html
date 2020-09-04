@@ -1,0 +1,27 @@
+<div class="popup-medium">
+    <form [formGroup]="addTransactionForm">
+        <h2 class="popup-title text-center">Add Transaction</h2>
+    <div mat-dialog-content>
+        <div class="form-group">
+            <mat-label>Source</mat-label>
+        <input class="form-control" type="text" formControlName="Source" matInput FocusElement placeholder="Enter Source">
+        </div>
+
+        <div class="form-group">
+            <mat-label>Amount</mat-label>
+        <input class="form-control" type="number" formControlName="Amount" min=1 [max]="organizationData.Amount" matInput FocusElement placeholder="Enter Amount">
+        </div>
+
+        <div class="form-group">
+            <mat-label>Payment Note</mat-label>
+        <input class="form-control" type="text" formControlName="PaymentNote" matInput FocusElement placeholder="Enter Note">
+        </div>
+    </div>
+    <div mat-dialog-actions class="btn-box">
+        <div class="full-width text-right">
+            <button mat-flat-button class="app-primary-button"  [disabled]="!addTransactionForm.valid" (click)="onAddTransaction()">Add Transaction</button>
+            <button mat-flat-button class="app-secondary-button"  (click)="onNoClick()">Cancel</button>
+        </div>
+    </div>
+    </form>
+</div>

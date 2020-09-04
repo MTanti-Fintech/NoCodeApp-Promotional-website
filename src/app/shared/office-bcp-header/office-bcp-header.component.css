@@ -1,0 +1,334 @@
+.office-bcp-header{
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    padding: 10px 0px;
+    background-color:#131212;
+    height: 55px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.office-bcp-header a.logo {
+    margin-left: 60px;
+}
+.office-bcp-header a.logo img{
+    margin: 0px;
+    margin-top: -7px;
+    width: 145px !important;
+    height: auto !important;
+}
+.org-name-container{
+    float: right;
+}
+.inline{
+  display: flex;
+}
+.value{
+  margin-left: 15px;
+}
+.form-control{
+  background: #fff;
+  padding: 12px 10px;
+  font-size: 16px;
+  border: 1px solid #9E4100;
+  border-radius: 3px;
+  width: 100%;
+  color: black;
+}
+
+.org-name-container, .user-name-container, .login-userinfo-container {
+    text-align: left;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-right: 20px;
+}
+.office-bcp-header .header-item{
+  padding-left: 20px;
+  position: relative;
+}
+.office-bcp-header .header-item:before{
+  content: "";
+    display: inline-block;
+    position: absolute;
+    left: -2px;
+    top: 0px;
+    height: 31px;
+    width: 2px;
+    background: #312d2d;
+    z-index: 1;
+}
+.office-bcp-header .logo.header-item:before{
+  top: -6px;
+}
+.login-userinfo-container {
+    width: auto;
+    float: right;
+}
+.login-userinfo-container mat-label, .change-org-list mat-label{
+    float: left;
+    width: auto;
+    margin-right: 10px;
+    color: white;
+    font-weight: 600;
+}
+.login-userinfo-container mat-select{
+    width: 200px;
+    float: left;
+    background-color: none;
+}
+mat-select.custome-dropdown{
+    background:transparent;
+    border: 1px solid #494949;
+}
+
+.org-name{
+    color: #fda81e;
+    font-weight: 600;
+    font-size: 14px;
+}
+.org-title{
+    color: #a0a0a0;
+    font-size: 13px;
+    margin-right: 10px;
+    width: auto;
+    margin-top: 6px;
+}
+
+button{
+    padding: 0;
+}
+.org-name-container a {
+    text-decoration: none;
+    font-size: 13px;
+    color:#9A9A9A;
+    display: block;
+    border: 1px solid rgb(90, 90, 90);
+    padding: 3px 5px;
+    text-align: center;
+  }
+mat-label{
+    color: #8d8d8d;
+    /* font-size: 13px;
+    margin-top: 9px;
+    margin-left: 10px; */
+    font-size: 13px;
+}
+.mat-select{
+    border-radius: 0px;
+    font-size: 13px;
+    color: #B4B4B4;
+    height: calc(1em + 1.0rem + 2px);
+    padding: 0.0rem 0.35rem;
+}
+  .user-name-container{
+      font-size: 12px;
+      /* margin-right: 20px; */
+      float: right;
+  }
+  .user-name-container span{
+      color: white;
+      position: relative;
+      top: 5px;
+  }
+  
+.username-color{
+    color: #D75C07!important;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 14px;
+}
+  .org-name-container a span{
+    color: #999999;
+    font-size: 16px;
+  }
+  .org-name-container a:hover span{
+    color: white;
+  }
+  
+  .org-name-container a:hover {
+    color: #F39C12;
+    background-color: #1C1C1C;
+  }
+  .org-name-container a.active{
+    color: #F39C12;
+    background-color: #1C1C1C;
+  }
+  .list-org-btn{
+      background-color: rgb(255, 255, 255);
+
+  }
+  /* .change-org-list{
+      width: 325px;
+      margin-top: 5px;
+  } */
+  .change-org-list a{
+      float: right;
+      margin-left: 10px;
+      color: #D75C07;
+      background: #323232;
+      height: 31px;
+      width: 31px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+  }
+  .change-org-list a span{
+    color: #F39C12;
+  }
+  .change-org-list mat-label{
+      font-size: 12px;
+  }
+  .change-org-list mat-select{
+      width: 200px;
+  }
+
+  .login-user-photo{
+      float: left;
+      margin-right: 10px;
+  }
+  .login-user-photo img{
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+  }
+  .login-user-photo span.material-icons{
+    font-size: 24px;
+  }
+  .sidenav {
+    height: 100%;
+    width: 244px;
+    position: fixed;
+    z-index: 1;
+    top: 55px;
+    left: 0;
+    background-color:#131212;
+    overflow-x: hidden;
+    padding-top: 0px;
+  }
+  .sidenav .mat-list-base{
+    padding-top: 0px;
+  }
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  .sidenav a {
+    /* padding: 4px 5px 4px 15px; */
+    text-decoration: none;
+    font-size: 14px;
+    color:#5A6881;
+    display: block;
+    height: 55px;
+  }
+  /* .sidenav a::before{
+    content: ".";
+    background: #D75C07;
+    line-height: normal;
+    padding: 0px;
+    height: 53px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  } */
+
+  .sidenav a span{
+    position: relative;
+    /* top: 3px; */
+    left: -7px;
+    color: #999999;
+  }
+  .sidenav a:hover span{
+    color: white;
+  }
+  
+  .sidenav a:hover {
+    color: #D75C07;
+    background-color: black;
+  }
+.sidenav a:hover::before{ 
+  content: ".";
+  background: #D75C07;
+  line-height: normal;
+  padding: 0px;
+  height: 55px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transition: ease-in-out  0.3s;
+  width: 3px;
+}
+.sidenav a.is-active{
+  color: #D75C07;
+  background-color: black;
+}
+.sidenav a.is-active::before{
+  content: ".";
+  background: #D75C07;
+  line-height: normal;
+  padding: 0px;
+  height: 55px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transition: ease-in-out  0.3s;
+  width: 3px;
+}
+.sidenav a.is-active span {
+  color: #fff;
+}
+.sidenav span{
+  background:#191C24;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 22px;
+}
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+   
+  }
+  .example-toolbar{
+    background-color: black;
+    color: white;
+  }
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  .sidebarlist{
+    color: rgb(83, 58, 58);
+    font-size: medium;
+    font-weight: bold;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+  }
+  ::ng-deep .mat-select-value, ::ng-deep .mat-select-arrow{
+      color:#9A9A9A;
+  }
+  ::ng-deep .material-icons{
+      font-size: 21px;
+  }
+.menu-show-hide-icon{
+  color: orange; position: fixed; z-index: 9999; top:8px; left: 8px;
+}
+.is-active {
+  color:#131212 !important;
+  background:#fafafa !important;
+  transition: ease-in-out;
+}
+.is-active span{
+  color : #fff !important;
+}
+

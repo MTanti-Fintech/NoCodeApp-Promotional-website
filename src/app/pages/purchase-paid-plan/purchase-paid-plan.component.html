@@ -1,0 +1,587 @@
+<div class="org-popup">
+  <h2 class="text-center">{{Title}}</h2>
+  <mat-horizontal-stepper linear #stepper (selectionChange)="onStepChange($event)" class="popup-stapper-main">
+    <mat-step [stepControl]="addOrganizationForm">
+      <form [formGroup]="addOrganizationForm">
+        <ng-template matStepLabel>Select Organization & Plan</ng-template>
+        <div class="m-b-10 clearfix">
+          <h2>Admin</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="full-width form-group">
+                <mat-label>Admin Email *</mat-label>
+                <input type="text" class="form-control" formControlName="adminEmail" matInput
+                  placeholder="Enter Organization Name" />
+                <mat-error *ngIf="addOrganizationForm.controls.adminEmail.errors?.required && addOrganizationForm.controls.adminEmail.touched">Admin Email is
+                  <strong>required</strong></mat-error>
+                <mat-error *ngIf="addOrganizationForm.controls.adminEmail.errors?.email">Please Enter A Valid Email
+                  Address.</mat-error>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix">
+          <h2>Organization</h2>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="example-full-width form-group">
+                <mat-label>Organization Name *</mat-label>
+                <input class="form-control" type="text" formControlName="organizationName" matInput
+                  placeholder="Enter Organization Name" />
+                <mat-error *ngIf="addOrganizationForm.controls.organizationName.errors?.required && addOrganizationForm.controls.organizationName.touched">Organization Name is
+                  <strong>required</strong></mat-error>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="example-full-width form-group">
+                <mat-label>Domain *</mat-label>
+                <div class="input-text-group inside">
+                  <input type="text" class="form-control" formControlName="domain" matInput 
+                    placeholder="Enter Organization Name" (change)="check($event.target.value)"  (paste)="check($event.target.value)" />
+                  <strong class="after-text">.officebcp.com</strong>
+                </div>
+                <mat-error *ngIf="addOrganizationForm.controls.domain.errors?.required && addOrganizationForm.controls.domain.touched">Domain is
+                  <strong>required</strong></mat-error>
+                <mat-error *ngIf="addOrganizationForm.controls.domain.errors?.pattern">Please Enter Valid Domain name
+                </mat-error>
+                <mat-error *ngIf = "!isValid">Domain Name already exists !</mat-error>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="example-full-width form-group email-tooltip">
+                <mat-label>Communication Email *</mat-label>
+                <input type="text" class="form-control" formControlName="communcationEmail" matInput
+                  placeholder="Enter Organization Name" />
+                <mat-error *ngIf="addOrganizationForm.controls.communcationEmail.errors?.required && addOrganizationForm.controls.communcationEmail.touched">Communication Email
+                  is <strong>required</strong></mat-error>
+                <mat-error *ngIf="addOrganizationForm.controls.communcationEmail.errors?.email">Please Enter A Valid
+                  Email Address.</mat-error>
+                <span class="material-icons"
+                  matTooltip="Communication email is going to use to send monthly/yearly invoices to the organization">
+                  new_releases
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="example-full-width form-group">
+                <mat-label>Model *</mat-label>
+                <mat-select formControlName="model" (selectionChange)="onModelValueChange()">
+                  <mat-option *ngFor="let item of models" [hidden]="item.Plan_Type_Mst_Id==1"
+                    [value]="item.Plan_Type_Mst_Id">
+                    {{item.Plan_Name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="addOrganizationForm.controls.model.errors?.required && addOrganizationForm.controls.model.touched">Please Select a Plan.</mat-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6" *ngIf="showTimeDaySelection">
+              <div class="example-full-width form-group email-tooltip">
+                <mat-label>Working Days *</mat-label>
+                <div class="days-select">
+                  <mat-checkbox (change)="daysCheckChange($event,item)" formControlName="dayTimeSelection"
+                    *ngFor="let item of days | keyvalue" [disabled]="optionDiabled">{{item.value}}</mat-checkbox>
+                  <mat-error *ngIf="addOrganizationForm.controls.dayTimeSelection.errors?.required && addOrganizationForm.controls.dayTimeSelection.touched">Please Select
+                    Working Days</mat-error>
+                  <mat-error *ngIf="addOrganizationForm.value.model==2 && planSelectedDays.length!=5">Please Select 5
+                    Days</mat-error>
+                  <mat-error *ngIf="addOrganizationForm.value.model==3 && planSelectedDays.length!=6">Please Select 6
+                    Days</mat-error>
+                </div>
+              </div>
+              <a (click)="clearSelection()" *ngIf="planSelectedDays.length>0" class="clear-selection">Clear
+                Selection</a>
+
+            </div>
+
+            <div class="col-sm-6" *ngIf="showTimeDaySelection">
+              <div class="example-full-width form-group email-tooltip">
+                <mat-label>Machine Start Time *</mat-label>
+                <div class="days-select">
+                  <mat-form-field>
+                    <mat-label>Start Time</mat-label>
+                    <input type="time" (keyup)="getUTCTime()" (change)="getUTCTime()" matInput
+                      formControlName="StartTime" min="00:00" max="12:00">
+                    <mat-error *ngIf="addOrganizationForm.controls.StartTime.errors?.required && addOrganizationForm.controls.StartTime.touched">Please Select Office
+                      Hours.</mat-error>
+                  </mat-form-field>
+                  <!-- <mat-form-field> -->
+                  <mat-label>Equivalent UTC Time</mat-label>
+                  Start Time: {{UTCStartTime}}<br>
+                  End Time : {{UTCEndTime}}
+                  <!-- </mat-form-field> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <mat-label>Plan Start Date *</mat-label>
+                <input matInput formControlName="StartAt" [min]="minDate" [matDatepicker]="dp3" class="form-control"
+                  disabled>
+                <mat-error *ngIf="addOrganizationForm.controls.StartAt.errors?.required">Please Select Plan Start Date
+                </mat-error>
+                <mat-datepicker-toggle matSuffix [for]="dp3" class="material-icons"></mat-datepicker-toggle>
+                <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="clearfix">
+          <button class="login100-form-btn pull-right" mat-button color="secondary" matStepperNext [disabled]="!isValid"><span
+              class="material-icons m-r-5">arrow_forward</span>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="inpuEmployeeForm">
+        <h2 class="popup-sub-header">Employees</h2>
+        <div class="row">
+          <div class="incDec-ctrl-wrapper col-md-12">
+            <div class="divTitle">
+              <h4 class="ctrl-title">Total Employee</h4>
+            </div>
+            <div class="incDec-ctrl">
+              <button mat-icon-button class="incDec-button left">
+                <mat-icon (click)="onDecrementNumberOfUser(0)">remove</mat-icon>
+              </button>
+              <input type="number" formControlName="LightUsers" (change)="onEmployeeNumberInputChange(0)" />
+              <button mat-icon-button class="incDec-button right">
+                <mat-icon (click)="onIncrementNumberOfUser(0)">add</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-12"><p>Note: Once your setup is done you can add more Employees as needed.</p></div>
+          <!-- <div class="col-sm-4">
+            <div class="incDec-ctrl-wrapper">
+              <h4 class="ctrl-title">Medium Employee</h4>
+              <div class="incDec-ctrl">
+                <button mat-icon-button class="incDec-button left">
+                  <mat-icon (click)="onDecrementNumberOfUser(1)">remove</mat-icon>
+                </button>
+                <input type="number" formControlName="MediumUsers" (change)="onEmployeeNumberInputChange(1)" />
+                <button mat-icon-button class="incDec-button right">
+                  <mat-icon (click)="onIncrementNumberOfUser(1)">add</mat-icon>
+                </button>
+              </div>
+              <div class="description">
+                <h4 class="ctrl-title sub-title">Description</h4>
+                <p class="ctrl-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="incDec-ctrl-wrapper">
+              <h4 class="ctrl-title">Heavy Employee</h4>
+              <div class="incDec-ctrl">
+                <button mat-icon-button class="incDec-button left">
+                  <mat-icon (click)="onDecrementNumberOfUser(2)">remove</mat-icon>
+                </button>
+                <input type="number" formControlName="HeavyUsers" (change)="onEmployeeNumberInputChange(2)" />
+                <button mat-icon-button class="incDec-button right">
+                  <mat-icon (click)="onIncrementNumberOfUser(2)">add</mat-icon>
+                </button>
+              </div>
+              <div class="description">
+                <h4 class="ctrl-title sub-title">Description</h4>
+                <p class="ctrl-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </form>
+
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Employees & Software</ng-template>
+
+      </form>
+
+      <div class="header-action-box appClearfix">
+        <div class="with-abs-right-box">
+          <div class="right-action-box">
+            <div class="form-group search-User">
+              <div class="pull-left head-btn-box">
+                <button mat-flat-button class="app-action-button" (click)="onAddUser()">
+                  <mat-icon>person_add</mat-icon>
+                  <span class="btn-text">Add Employee</span>
+                </button>
+              </div>
+              <!-- <button mat-flat-button class="app-secondary-button"
+                [disabled]="totalUserCount>=inpuEmployeeForm.value.LightUsers" (click)="onAddUser()"><mat-icon>person_add</mat-icon>Add Employee</button> -->
+            </div>
+          </div>
+        </div>
+        <div class="right-box">
+          <div class="form-group search-common">
+            <input class="form-control search-icon" matInput (keyup)="searchUser($event)" placeholder="Search">
+          </div>
+
+        </div>
+      </div>
+      <div class="common-grid-box m-b-20">
+
+        <div class="tbl-scroll-container">
+          <table  mat-table #lightUserTable [dataSource]="dataSource" matSort class="employee-table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="Id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr. </th>
+              <td mat-cell *matCellDef="let element;"> {{dataSource.filteredData.indexOf(element)+1}} </td>
+            </ng-container>
+        
+            <!-- Email Column -->
+            <ng-container matColumnDef="Email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+            </ng-container>
+        
+            <!-- First name Column -->
+            <!-- <ng-container matColumnDef="FirstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.First_Name}} </td>
+            </ng-container>
+        
+             -->
+            <!-- Last name Column -->
+            <!-- <ng-container matColumnDef="LastName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.Last_Name}} </td>
+            </ng-container> -->
+       <ng-container matColumnDef="Department">
+
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+              <td mat-cell *matCellDef="let element">
+                <div class="cell-inner-wrapper">
+                  <span class="status-healthy" *ngFor="let item of departments" >
+                    <span *ngIf="element.departmentId==item.Department_Mst_Id">{{item.Department_Name}}</span>
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="profile">
+              <th mat-header-cell *matHeaderCellDef class="icon-column"> User Profile </th>
+              <td mat-cell *matCellDef="let element" value="element.Usage_Profile">{{element.Usage_Profile_value}}
+              </td>
+                </ng-container>
+            <ng-container matColumnDef="remove">
+              <th mat-header-cell *matHeaderCellDef class="action-col"> Action </th>
+              <td mat-cell *matCellDef="let element" class="action-col text-center">
+                <button mat-icon-button matTooltip="Delete" (click)="onDeleteRemoteUser(element,deleteRemoteUser)">
+                  <i class="material-icons" >delete_forever</i>
+                </button>
+                <button mat-icon-button matTooltip="Edit" (click)="EditEmployeePopup(element)">
+                  <i class="material-icons" >create</i>
+                </button>
+                <!-- <mat-slide-toggle class="primary-toggle" [checked]="element.Is_Active == 1 ? true : false" (change)="EnableDisableConfirmPopup($event,element.organization_Mst_Id)"></mat-slide-toggle> -->
+                  </td>
+            </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+      </div>
+      <mat-paginator #LightTablepaginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+   
+
+
+      <div class="with-abs-right-box">
+        <h2 class="popup-sub-header">Software</h2>
+        <div class="right-action-box">
+          <div class="form-group search-common">
+
+            <input matInput #softwareSearch placeholder="Search for a Software" class="form-control search-icon">
+          </div>
+        </div>
+      </div>
+
+      <div class="with-padding">
+        <!-- <div class="pull-right">
+          <div class="form-group search-common pull-right"> -->
+
+        <!-- </div>
+      </div> -->
+        <mat-accordion class="common-accordian">
+          <mat-expansion-panel class="no-pad" *ngFor="let category of softWareList">
+            <mat-expansion-panel-header collapsedHeight="40px" expandedHeight="40px">
+              <mat-panel-title>{{category.Category_Name}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-selection-list class="project-list no-pad " (selectionChange)="softwarewCheckChange($event)">
+              <mat-list-option checkboxPosition="before"
+                *ngFor="let item of (category.SoftwareList|softwareSearch:softwareSearch.value)"
+                [value]="item.Software_Mst_Id" [selected]="item.Category_Mst_Id==2">
+                <mat-icon mat-list-icon>
+                  <img class="project-thumb" src="../../../assets/images/java.png" alt="project-thumbnail">
+                </mat-icon>
+
+                <div class="text-content">
+                  <h4 class="project-name">{{item.Software_Name}}</h4>
+                  <p class="project-desc">Description: {{item.Description}}</p>
+                  <p class="project-desc">Version : {{item.Version}}</p>
+                </div>
+              </mat-list-option>
+
+            </mat-selection-list>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+        <strong class="confirmationFont">Note:</strong> Please contact us to install Software that is not in the list.
+      </div>
+
+
+      <div class="m-t-15">
+        <button class="login100-form-btn" mat-button matStepperPrevious><span class="material-icons m-r-5">
+            arrow_back
+          </span>Back</button>
+        <button class="login100-form-btn" mat-button matStepperNext (click)="generateBill(1)"><span
+            class="material-icons m-r-5">
+            arrow_forward
+          </span>Next</button>
+      </div>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Payment</ng-template>
+      <form [formGroup]="paymentForm">
+        <div class=" info-section">
+          <h3>
+            <span>
+              Organization & Plan
+            </span>
+            <button mat-icon-button>
+              <mat-icon (click)="moveToStep(0)">edit</mat-icon>
+            </button>
+          </h3>
+          <div class="row">
+            <div class="col first-col">
+              <div class=" form-group">
+                <mat-label>Organization Name</mat-label>
+                <p>{{addOrganizationForm.value.organizationName}}</p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class=" form-group">
+                <mat-label>Domain</mat-label>
+                <p>{{addOrganizationForm.value.domain}}</p>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class=" form-group">
+                <mat-label>Communication Email
+                </mat-label>
+                <p>{{addOrganizationForm.value.communcationEmail}}</p>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class=" form-group">
+                <mat-label>Model Selected</mat-label>
+                <div *ngFor="let item of models">
+                  <p *ngIf="item.Plan_Type_Mst_Id==addOrganizationForm.value.model">{{item.Plan_Name}}</p>
+                </div>
+                <div class="selected-days">
+                  <label [ngClass]="{'disable':!planSelectedDays.includes(item.key)}"
+                    *ngFor="let item of days | keyvalue">{{item.value | uppercase}}</label>
+                </div>
+                <p class="selected-time">
+                  Local Time :&nbsp;
+                  {{addOrganizationForm.value.StartTime}} TO {{addOrganizationForm.value.EndTime}}
+                  <br>
+                  UTC Time :&nbsp;
+                  {{UTCStartTime}} TO {{UTCEndTime}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-section">
+          <h3>
+            <span>
+              Employees
+            </span>
+            <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <mat-icon (click)="moveToStep(1)">edit</mat-icon>
+            </button>
+          </h3>
+          <div class="row">
+            <div class="col first-col">
+              <div class=" form-group">
+                <mat-label>Total Employee</mat-label>
+                <p>{{inpuEmployeeForm.value.LightUsers}}</p>
+              </div>
+            </div>
+            <!-- <div class="col-sm-2">
+              <div class=" form-group">
+                <mat-label>Medium</mat-label>
+                <p>{{noOfMediumUsers}}</p>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class=" form-group">
+                <mat-label>Heavy
+                </mat-label>
+                <p>{{noOfHeavyUsers}}</p>
+              </div>
+            </div> -->
+
+          </div>
+        </div>
+        <div class="info-section footer-section">
+          <div class="row">
+            <div class="col first-col">
+              <div class="form-group">
+                <mat-label>Duration</mat-label>
+                <mat-select formControlName="subscriptionType" (selectionChange)="onsubscriptionTypeChange()"
+                  class="m-b-15">
+                  <mat-option *ngFor="let item of subscriptionTypes |keyvalue" [value]="item.key">
+                    {{item.value}}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <mat-label>Discount</mat-label>
+                <p class="discount">{{discountRate}}%</p>
+                <p>Discount will apply on <strong>Yearly Subscription</strong> </p>
+              </div>
+            </div>
+            <div class="col text-right bill-info">
+              <div class="bill-details">
+                <div class="bill-values">
+                  <label> Total</label>
+                  <span class="value big-value">$ {{paymentForm.value.amount}}</span>
+                </div>
+                <div class="bill-values" *ngIf="paymentForm.value.subscriptionType=='1'">
+                  <label> Original</label>
+                  <span class="value"><del>$ {{yearlyAmount}}</del></span>
+                </div>
+                <div class="bill-values" *ngIf="paymentForm.value.subscriptionType=='1'">
+                  <label> Saving</label>
+                  <span class="value">$ {{totalDiscount}}</span>
+                </div>
+                <div class="bill-values" *ngIf="paymentForm.value.subscriptionType=='1'">
+                  <label> Per Month</label>
+                  <span class="value">$ {{paymentForm.value.amount/12}}</span>
+                </div>
+                <!-- <div class="bill-values">
+                  <label> Per Month</label>
+                  <span class="value">{{paymentForm.value.amount</span>
+                </div> -->
+                <!-- <p *ngIf="paymentForm.value.subscriptionType=='1'">
+                  <del>${{yearlyAmount}}</del>
+                </p>
+                <p class="bill-amt">Bill Amount: <span>${{paymentForm.value.amount}}</span></p>
+                <p class="savings" *ngIf="paymentForm.value.subscriptionType=='1'">
+                  Total Savings: <span>${{totalDiscount}}</span>
+                </p>
+                <p class="other-info">
+                  ( Inclusive of all taxes )
+                </p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <div>
+        <button class="login100-form-btn" mat-button matStepperPrevious><span
+            class="material-icons m-r-5">arrow_back</span>Back</button>
+        <button class="login100-form-btn secondary-btn" mat-button
+          (click)="onConfirmationPopup(ConfirmationPopUp)"><span class="material-icons m-r-5">credit_card</span>Process
+          to Pay</button>
+      </div>
+
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+<ng-template #deleteRemoteUser>
+  <div>
+    <h2 mat-dialog-title>Are you sure</h2>
+    <form [formGroup]="deleteUserForm">
+      Email Id: &nbsp;<input matInput disabled formControlName="email">
+      <br><br>
+    </form>
+  </div>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
+</ng-template>
+
+<ng-template #ConfirmationPopUp>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">Payment Confirmation </h2>
+
+    <div mat-dialog-content>
+
+      <p>You will receive invoice and payment link of <span
+          class="confirmationFont">${{paymentForm.value.amount}}</span> on
+        <span class="confirmationFont">{{addOrganizationForm.value.communcationEmail}}</span>.<br>
+        Press "Yes" to proceed and generate invoice.
+      </p>
+
+    </div>
+    <div class="header-action-box appClearfix">
+      <div class="right-box">
+        <button mat-raised-button class="app-primary-button" (click)="onSubmitPlan()">Yes</button> &nbsp;
+        <button mat-raised-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+        <!-- <a href="assets/pdf/OfficeBCPGuide.pdf">download</a> -->
+        <!-- <button mat-raised-button class="app-secondary-button" (click)="onopensuccess(successInvoice)">Cancel</button> -->
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- 
+<ng-template #successInvoice>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">Invoice Generated Successfully</h2>
+    <div mat-dialog-content>
+      <p>Invoice generated <span class="confirmationFont">{{generatedInvoice}}</span> and you will email for
+        this invoice shortly to pay and use Services.
+        <br><br>
+        Check billing sections for more details and updates.
+        <br><br>
+        visit <a (click)="finalOkClick(1)">How To Use Services</a>
+        <br><br>
+        or <a (click)="download()">Download Document</a>
+      </p>
+    </div>
+    <div class="header-action-box appClearfix">
+      <div class="right-box">
+        <button mat-raised-button class="app-secondary-button" (click)="finalOkClick(0)">ok</button>
+      </div>
+    </div>
+  </div>
+</ng-template> -->
+
+<ng-template #changeUsageProfile>
+  <div class="popup-medium">
+    <h2 class="text-center popup-title">Update Usage_Profile</h2>
+
+    <div mat-dialog-content>
+      <form [formGroup]="updateUsageProfileForm">
+        <p>Do you want to change User Profile for <span
+            class="confirmationFont">{{updateUsageProfileForm.value.Full_Name}}</span>?
+        </p>
+        <mat-select class="form-control" formControlName="Usage_Profile">
+          <mat-option *ngFor="let item of usageTypes | keyvalue" [value]=item.key>
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </form>
+    </div>
+    <br>
+    <div class="header-action-box appClearfix">
+      <div class="right-box">
+        <button mat-raised-button class="app-primary-button" (click)="onUpdateUsageProfile()">Update</button> &nbsp;
+        <button mat-raised-button class="app-secondary-button" (click)="onNoClick()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
