@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginService } from '../pages/login/login.service';
 import { PasswordConfirmDialogComponent } from './password-confirm-dialog/password-confirm-dialog.component';
 import { from, BehaviorSubject } from 'rxjs';
 
@@ -24,7 +23,6 @@ export class CommonService {
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private service: LoginService
   ) { }
 
   // sendOrganizationData(data) {
@@ -37,36 +35,7 @@ export class CommonService {
     CommonService.MustChangePassword = data;
   }
 
-  async getUserPermission() {
-    try {
-      const data: any = await this.service.getUserPermission();
-      if (data && data.length > 0) {
-        data.push({
-          is_active: 1,
-          permission_id: null,
-          permission_name: 'home',
-          permissions: [2],
-          total: 2,
-          upm_id: null
-        }
-        );
-      }
-      CommonService.GlobalVar = [];
-      this.localStoragePermission = [];
-      if (data) {
-        for (const userper of data) {
-          userper.permission_name = userper.permission_name.toLowerCase();
-          if (userper.total > 0) {
-            this.localStoragePermission.push(Object.assign({}, userper));
-          }
-        }
-      }
-      CommonService.GlobalVar = this.localStoragePermission;
-    } catch (e) {
-      
-    }
-  }
-
+ 
   async checkMustChangePassword() {
     // const data: any = await this.service.userdetails();
     // if (data) {

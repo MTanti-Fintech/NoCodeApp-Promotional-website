@@ -49,7 +49,6 @@ import { ChatWidgetComponent } from "./shared/chat-widget/chat-widget.directive"
 import { FocusElementDirective } from "./shared/focus-element.directive";
 import { ConfirmPopUpComponent } from './pages/confirm-pop-up/confirm-pop-up.component';
 import { OfficebcpFooterComponent } from './shared/officebcp-footer/officebcp-footer.component';
-import { AddDepartmentDialogComponent } from './shared/add-department-dialog/add-department-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +66,6 @@ import { AddDepartmentDialogComponent } from './shared/add-department-dialog/add
     FaqPopupComponent,
     
     DeleteConfirmationDialogComponent,
-    AddDepartmentDialogComponent,
     TrackScollDirective,
     SoftwareFilterPipe,
     StaticSearchPipe,
@@ -157,7 +155,6 @@ import { AddDepartmentDialogComponent } from './shared/add-department-dialog/add
     FaqPopupComponent,
     
     DeleteConfirmationDialogComponent,
-    AddDepartmentDialogComponent,
     MatConfirmDialogComponent,
     SuccesfulInvoicePopupComponent,
   ],
