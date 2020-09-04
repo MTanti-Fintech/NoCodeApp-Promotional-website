@@ -10,7 +10,6 @@ import {
 import { DOCUMENT } from "@angular/common";
 import * as $ from "jquery";
 import { AppComponent } from "src/app/app.component";
-import { SignUpService } from "./signup.service";
 import { CommonService } from "src/app/shared/common.service";
 import { NgForm, FormGroup } from "@angular/forms";
 import { OrganizationDetails } from "src/app/models/OrganizationDetails";
