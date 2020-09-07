@@ -7,7 +7,7 @@
   text-align: center;
   text-transform: none;
   // color: rgb(255, 255, 255);
-  color: #ff1616;
+  color: rgb(33, 164, 156);
   line-height: normal;
   margin-bottom: 62px;
   margin-top: 10px;
@@ -382,17 +382,16 @@ $header-height: 72px;
     // color: white;
     color: rgb(0, 0, 0);
     font-weight: 200;
-    text-align: center;
   }
   ul {
-    display: block;
+    // display: block;
     list-style-type: disc;
     font-weight: 200;
     line-height: 35px;
     font-size: 20px;
     color: black;
-    text-align: center;
     list-style-position: inside;
+    margin-left: 100px;
   }
 
   // .img-container {
